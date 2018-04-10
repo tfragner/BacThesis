@@ -17,7 +17,7 @@
 %% e.g., "A4", "letter", "legal", "executive", ...
 %% The size of the paper of the resulting PDF file.
 
-\newcommand{\mylaterality}{twoside}
+\newcommand{\mylaterality}{oneside}
 %% "oneside" or "twoside"
 %% Either you are creating a document which is printed on both, left pages
 %% and right pages (twoside) or you create a document which is printed
@@ -34,7 +34,7 @@
 %% How to separate paragraphs: indention ("no") or spacing ("half",
 %% "full", ...).
 
-\newcommand{\myBCOR}{0mm}
+\newcommand{\myBCOR}{10mm}
 %% Inner binding correction. This value depends on the method which is
 %% being used to bind your printed result. Some techniques do not
 %% require a binding correction at all ("0mm"), other require for
@@ -45,19 +45,19 @@
 %% e.g., 10pt, 11pt, 12pt
 %% The font size of the main text in pt (points).
 
-\newcommand{\mylinespread}{1.0}
+\newcommand{\mylinespread}{1.5}
 %% e.g., 1.0, 1.5, 2.0
 %% Line spacing in %/100. For example 1.5 means 150% of the usual line
 %% spacing. Please use with caution: 100% ("1.0") is fine because the
 %% font was designed for it.
 
-\newcommand{\mylanguage}{ngerman,american}
+\newcommand{\mylanguage}{american,ngerman}
 %% "english,ngerman", "ngerman,english", ...
 %% NOTE: The *last* language is the active one!
 %% See babel documentation for further details.
 
 %% BibLaTeX-settings: (see biblatex reference for further description)
-\newcommand{\mybiblatexstyle}{authoryear}
+\newcommand{\mybiblatexstyle}{ieee}
 %% e.g., "alphabetic", "authoryear", ...
 %% The biblatex style which is being used for referencing. See
 %% biblatex documentation for further details and more values.
@@ -71,13 +71,13 @@
 \newcommand{\mybiblatexdashed}{false}  %% "true" or "false"
 %% If true: replace recurring reference authors with a dash.
 
-\newcommand{\mybiblatexbackref}{true}  %% "true" or "false"
+\newcommand{\mybiblatexbackref}{false}  %% "true" or "false"
 %% If true: create backward links from reference to citations.
 
 \newcommand{\mybiblatexfile}{references-biblatex.bib}
 %% Name of the biblatex file that holds the references.
 
-\newcommand{\mydispositioncolor}{30,103,182}
+\newcommand{\mydispositioncolor}{0,0,0}
 %% e.g., "30,103,182" (blue/turquois), "0,0,0" (black), ...
 %% Color of the headings and so forth in RGB (red,green,blue) values.
 %% NOTE: if you are using "0,0,0" for black, printers might still
@@ -123,7 +123,7 @@
 %% table of contents. If \mytodonotesoptions is set to "disable", no
 %% list of todos is added, independent of this setting here.
 
-\setboolean{english_affidavit}{true}  %% "true" or "false"
+\setboolean{english_affidavit}{false}  %% "true" or "false"
 %% If set to "true": the language of the statutory declaration text is set to
 %% English, otherwise it is in German.
 
@@ -133,8 +133,8 @@
 %% ========================================================================
 
 %% general metadata:
-\newcommand{\myauthor}{AUTHOR}  %% also used for PDF metadata (hyperref)
-\newcommand{\myauthorwithexistingtitles}{\myauthor{}, OLDDEGREE}  %% including
+\newcommand{\myauthor}{Thomas Fragner}  %% also used for PDF metadata (hyperref)
+\newcommand{\myauthorwithexistingtitles}{\myauthor{}}  %% including
                                 %% university degree already held
                                 %% (BSc, MSc, ...)
 \newcommand{\mytitle}{TITLE}  %% also used for PDF metadata (hyperref)
@@ -143,7 +143,7 @@
 
 %% this information is used only for generating the title page:
 \newcommand{\myworktitle}{Master's Thesis}  %% official type of work like ``Master theses''
-\newcommand{\mygrade}{Master of Science} %% title you are getting with this work like ``Master of ...''
+\newcommand{\mygrade}{Bachelor of Science} %% title you are getting with this work like ``Master of ...''
 \newcommand{\mystudy}{Telematik} %% your study like ``Arts''
 \newcommand{\mydegreeprogramme}{Master's degree programme: \mystudy} %% Master's or PhD degree programme
 \newcommand{\myuniversity}{Graz University of Technology} %% your university/school
@@ -247,6 +247,8 @@
 
 \listoffigures
 
+\listoftables
+
 %% if myaddlistoftodos is set to "true", the current list of open todos is added:
 \ifthenelse{\boolean{myaddlistoftodos}}{
   \newpage\listoftodos          %% handy if you are using todonotes with \todo{}
@@ -254,9 +256,14 @@
 
 \mainmatter                     %% KOMA: marks main part using arabic page numbers and such; only available in scrbook
 
+\input{einleitung}   %% remove this line to get rid of the style chapter
+\input{hintergrund}
+\input{empfehlungen}
+\input{analyse}
+\input{algorithmus}   %% remove this line to get rid of the example chapter
+\input{ergebnisse}
+\input{diskussion}
 
-\input{example-short-chapter}   %% remove this line to get rid of the example chapter
-\input{example-style-chapter}   %% remove this line to get rid of the style chapter
 
 %% include tex file chapters:
 % \include{introduction}        %% this is a suggestion: you have to create this file on demand

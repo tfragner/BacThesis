@@ -190,7 +190,7 @@
 %doc% state-of-the-art tools for generating things like the list of
 %doc% references using biblatex/biber (see
 %doc% Section~\ref{sec:references} for details). Unfortunately, some \LaTeX{} editors
-%doc% do not support this much better way of working with bibliography
+%doc% do not support this much better way of working with descriptionliography
 %doc% references yet. This section describes how to compile this template.
 %doc%
 %doc% \subsubsection{Compiling Using a \LaTeX{} Editor}
@@ -363,7 +363,7 @@
 fontsize=\myfontsize,%% size of the main text
 paper=\mypapersize,  %% paper format
 parskip=\myparskip,  %% vertical space between paragraphs (instead of indenting first par-line)
-DIV=calc,            %% calculates a good DIV value for type area; 66 characters/line is great
+DIV=12,            %% calculates a good DIV value for type area; 66 characters/line is great
 headinclude=true,    %% is header part of margin space or part of page content?
 footinclude=false,   %% is footer part of margin space or part of page content?
 open=right,          %% "right" or "left": start new chapter on right or left page
@@ -548,6 +548,8 @@ BCOR=\myBCOR,        %% binding correction (depends on how you bind
 %doc%
 \usepackage[backend=biber, %% using "biber" to compile references (instead of "biblatex")
 style=\mybiblatexstyle, %% see biblatex documentation
+maxcitenames=2,
+mincitenames=1,
 %style=alphabetic, %% see biblatex documentation
 dashed=\mybiblatexdashed, %% do *not* replace recurring reference authors with a dash
 backref=\mybiblatexbackref, %% create backlings from references to citations
@@ -556,7 +558,6 @@ hyperref=true, %% using hyperref-package references
 ]{biblatex}  %% remove, if using BibTeX instead of biblatex
 
 \addbibresource{\mybiblatexfile} %% remove, if using BibTeX instead of biblatex
-
 
 
 %doc%
@@ -696,3 +697,31 @@ hyperref=true, %% using hyperref-package references
 %%% End:
 %% vim:foldmethod=expr
 %% vim:fde=getline(v\:lnum)=~'^%%%%'?0\:getline(v\:lnum)=~'^%doc.*\ .\\%(sub\\)\\?section{.\\+'?'>1'\:'1':
+\usepackage{float}
+\usepackage{tabularx}
+\usepackage{caption}
+\usepackage{longtable}
+\captionsetup[table]{position=bottom}
+\renewcommand{\arraystretch}{1.2}
+%\usepackage{minted}
+%\AtBeginEnvironment{minted}{\singlespacing%
+%    \fontsize{10}{10}\selectfont}
+
+\renewcaptionname{ngerman}{\figurename}{Abb.}
+\renewcaptionname{ngerman}{\tablename}{Tab.}
+
+%\usepackage{ltablex}
+\usepackage{tabu}
+\usepackage{booktabs}
+\usepackage{setspace}
+
+\setlength{\LTpre}{0pt}
+\setlength{\LTpost}{-50pt}
+\tabulinesep =_6pt^0pt
+\extrarowsep =_0pt^0pt
+
+\newcolumntype{C}[1]{%
+  >{\centering\let\newline\\\arraybackslash\hspace{0pt}}m{#1}}
+  
+  \usepackage{array}
+  \usepackage[export]{adjustbox}

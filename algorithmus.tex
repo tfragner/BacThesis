@@ -1,0 +1,212 @@
+%----------------------------------------------------------------
+%
+%  File    :  thesis-style.tex
+%
+%  Author  :  Keith Andrews, IICM, TU Graz, Austria
+% 
+%  Created :  27 May 93
+% 
+%  Changed :  19 Feb 2004
+% 
+% styling and technical implementation adopted 2011 by Karl Voit
+%----------------------------------------------------------------
+
+%% defined an anvironment for the style Keith used to use:
+
+%%%% Time-stamp: <2012-08-20 17:41:39 vk>
+%% example text content
+%% scrartcl and scrreprt starts with section, subsection, subsubsection, ...
+%% scrbook starts with part (optional), chapter, section, ...
+\chapter{Algorithmus} 
+\label{cap:algorithmus}
+In diesem Kapitel wird beschrieben wie der Algorithmus zur Erkennung von sequenziell gelegten Prozessmodellen aufgebaut ist. Der Algorithmus berechnet nur die Zuordnung von Aufgaben zu Subjekten und vernachläßigt Austauschobjekte entsprechenden den Vorgaben von CBM. Die Bildinformationen müssen bereits als verarbeitbare Daten vorliegen (siehe Kapitel \ref{sec:ausgangsmeterial}). Die Erekenntnise aus Kapitel \ref{cha:erkennung} dienen als Grundlage für den Algorithmus.
+
+%\section{Grundgedanke} % (fold)
+%\label{sec:grundgedanke}
+%\todo{Max zitieren} Der erste Methode des bestehenden Algorithmus verwendet für die Erkennung von Mustern den euklidschen Abstand. Diese Metrik sagt nichts über die Richtung der Aufgabe zum Subjekt aus. Die zweite Methode nutzt Quadranten für die Zuordnungen der Aufgaben zu den Subjekten. Mit dieser Methode wird die Richtung zwar berücksichtigt,  allerdings gibt es starke Einschränkungen. Es ist beispielsweise nur möglich vertikal gelegte Prozesse zu erkennen. 
+
+%Der hier beschriebene Algorithmus schlägt die Verwendung einer weiteren Metrik vor, um den Algorithmus allgemeiner zu gestalten. 
+
+% section grundgedanke (end)
+Der Algorithmus zur Erkennung der Subjekt/Aufgabe Behziehungen ist in zwei Teilalgorithmen unterteilt (siehe Tabelle \ref{tab:hautpalgorithmus}). 
+
+\begin{center}
+	\label{tab:hautpalgorithmus}
+	\begin{tabularx}
+		{1.0\linewidth}{ c X } \textbf{Nr.} & \textbf{Beschreibung} \\
+		\hline 1 & Erkennung des verwendeten Legemusters (siehe \ref{sub:unterscheidung_der_legemethoden})\\
+		\hline 2 & Berechnung der Relationen \ref{sub:relationsauswertung}
+	\end{tabularx}
+	\captionof{table}{Algorithmus - Hauptalgorithmus} 
+\end{center}
+
+\section{Unterscheidung der Legemethoden} % (fold)
+\label{sub:unterscheidung_der_legemethoden}
+Bei gelegten Prozessmodellen kann grundsätzlich zwischen zwei Typen unterschieden werden: 
+
+Aufgrund der beschränkten Möglichkeiten ein Sternlayout (siehe Abb. \ref{fig:sternlegemethode}) auszuwerten, wird dieser Typ vom Algorithmus nicht ausgewertet. Allerdings muss zur Erkennung von korrekt gelegten Modellen nach der Linienmethode (siehe Abb. \ref{fig:linienlegemethode}) dennoch zwischen beiden Typen unterschieden werden, damit korrekt gelegte Prozesse automatisch erkannt werden können.
+
+Um diese beiden Legemethoden voneinander unterscheiden zu können wird als Metrik der Abstand zwischen Subjekten und Aufgaben verwendet. Bei einem Sternmuster ist der Abstand der Aufgaben zum nächstgelegenen Subjekt ähnlicher als bei Linienmustern. Durch die Verwendung von statistischen Berechnungen ist es möglich diese Unterscheidung zu treffen. Hierzu bietet sich die Verwendung des Variationskoeffizienten (siehe \ref{eq:variation}) an. Dieser gibt an wie groß die normalisierte Streuung einer Liste von Werten ist. Je größer der Wert desto wahrscheinlicher ist das verwendete Legemuster ein Linienmuster. Aufgrund der zu testenden Beispiele hat sich als mögliche Grenze $t=0.3$ (siehe \ref{eq:t}) ergeben. Dieser Wert sollte durch weitere Testfälle noch bestätigt werden.
+
+\begin{equation}
+	\label{eq:deviation}
+	SD(X)=\sqrt{\frac{1}{N}\sum_{i=0}^{N}\left(x_i - \overline{x}\right)^2} 
+\end{equation}
+\begin{equation}
+	\label{eq:variation}
+	v=\frac{SD(X)}{\overline{x}} 
+\end{equation}
+\begin{equation}
+	\label{eq:t}
+	t=\frac{1}{S}\sum_{i=0}^{S}v_{i}
+\end{equation}
+\begin{center}
+	\begin{tabularx}
+		{1.0\linewidth}{ c X } \textbf{Nr.} & \textbf{Beschreibung} \\
+		\hline 1 & Ermittle für jede Aufgabe den Abstand zum nächstgelegenen Subjekt \\
+		\hline 2 & Ordne jede Aufgabe dem nächstgelegenen Subjekt zu \\
+		\hline 3 & Wähle das erste Subjekt aus \\
+		\hline 4 & Wenn dem Subjekt nur eine Aufgabe zugeordnet ist gehe zu Schritt 6 \\
+		\hline 5 & Berechne den Variationskoeffizienten (siehe \ref{eq:variation}) für die Abstände zwischen dem Subjekt und den zugeordneten Aufgaben \\
+		\hline 6 & Wenn noch nicht verarbeitete Subjekte vorhanden sind wähle das nächste Subjekt gehe zu Schritt 3 \\
+		\hline 7 & Bilde das Mittel der Variationskoeffizienten (siehe \ref{eq:t})
+	\end{tabularx}
+	\captionof{table}{Algorithmus - Unterscheidung Stern- und Linienlayout} 
+\end{center}
+% subsection unterscheidung_der_legemethoden (end)
+
+\section{Relationsauswertung} % (fold)
+\label{sub:relationsauswertung}
+Der Algorithmus für die Relationsauswertung erfolgt in drei Schritten (siehe Tabelle \ref{tab:relationserkennung-basis}). Im ersten Schritt werden die Aufgaben initial den Subjekten zugeteilt. Im zweiten Schritt werden Subjekten die noch keine zugewiesene Aufgabe besitzen die nächstegelegene Aufgabe zugewiesen. Dieser Schritt basiert auf der Annahme, dass es in einem Prozess jedes Subjekt mindestens eine Aufgabe ausführen muss.
+
+\begin{center}
+	\label{tab:relationserkennung-basis}
+	\begin{tabularx}
+		{1.0\linewidth}{ c X } \textbf{Nr.} & \textbf{Beschreibung} \\
+		\hline 1 & Initiale Erstzuweisung (siehe Kapitel \ref{sub:erstzuordnung}) \\
+		\hline 2 & Subjekte ohne zugewiesene Aufgaben behandeln (siehe Kapitel \ref{sub:subjekte_prufen}) \\
+		\hline 3 & Verifiziere die Zuordnungen bis keine Änderungen am Prozess mehr gibt (siehe Kapitel \ref{sub:zuweisungen_verifizieren})\\
+	\end{tabularx}
+	\captionof{table}{Algorithmus - Relationsauswertung} 
+\end{center}
+% subsection relationsauswertung (end)
+
+\section{Erstzuordnung} % (fold)
+\label{sub:erstzuordnung}
+Wenn die Berechnung für $t$ aus Kapitel \ref{sub:unterscheidung_der_legemethoden} einen Wert größer $0.3$ ergeben hat, dann kann davon ausgegangen werden, dass es sich beim gelegten Prozess um ein valides Linienlegemuster handelt. In diesem Fall kann mit der Prozesserkennung fortgefahren werden.
+
+Im nächsten Schritt wird die initiale Zuordnung der Aufgaben zu Subjekten vorgenommen. Dieser Schritt kann ebenfalls in kleinere Unterschritte unterteilt werden:
+ 
+\begin{center}
+	\begin{longtabu} to \linewidth {@{}cX@{}} 
+		\textbf{Nr.} & \textbf{Beschreibung} \\ \midrule \endfirsthead
+		\textbf{Nr.} & \textbf{Beschreibung} \\ \midrule \endhead
+		\multicolumn{2}{c}{Fortsetzung auf nächster Seite}
+		\endfoot
+ 	   	\caption{Algorithmus - Initiale Zuweisung\label{tab:initial-assignment}}
+ 	   	\endlastfoot
+		 1 & Selektiere das Subjekt/Aufgabe - Paar mit dem geringten Abstand und speichere dieses in closestSubjectTask \\ \midrule 
+		2 & Suche die wahrscheinlichste Folgeaufgabe für closestSubjectTask (siehe Tabelle \ref{tab:find-followup})\\ \midrule 
+		3 & Füge eine Relation für das selektierte Subjekt/Aufgabe - Paar hinzu \\ \midrule 
+		4 & Entferne die Aufgabe aus der Aufgabenliste \\ \midrule 
+		5 & Wenn es eine Folgeaufgabe gibt gehe zu Schritt 6 ansonst gehe zu Schritt 8 \\ \midrule 
+		6 & Speichere die Kombination Subjekt/Folgeaufgabe in baseSubjektTask \\ \midrule 
+		7 & Gehe zu Schritt 2 \\ \midrule 
+		8 & Entferne das Subjekt aus der Subjektliste \\ \midrule 
+		9 & Wenn es noch Subjekte und Aufgaben ohne Zuordnung gibt gehe zu Schritt 1
+	\end{longtabu}
+\end{center}
+
+Im ersten Schritt wird die Subjekt/Aufgabe Kombination mit dem geringsten Abstand gesucht. Diese Kombination ist der wahrscheinlichste Beginn des Prozesses und es handelt sich auf die sicherste Erstzuordnung. Ausgehend von diesem Paar werden mögliche Folgeaufgaben identifiziert. Hierzu wird die \todo{Link} Kosinusähnlichkeit zur Bestimmung verwendet.
+
+Für die Bestimmung der Folgeaufgaben werden nur Aufgaben berücksichtigt, die noch keinem Subjekt zugeordnet wurden.
+
+\subsection{Folgeaufgabe suchen} % (fold)
+\label{ssub:folgeaufgabe_suchen}
+Der integrale Bestandteil des Algorithmus ist die Suche nach Folgeaufgaben. Dazu werden unter Berücksichtung des aktuellen Subjekts und der aktuell letzten Aufgabe des Subjekts Folgeaufgaben gesucht. Aus allen möglichen Folgeaufgaben wird die wahrscheinlichste Aufgabe anhand von Filterkriterien ermittelt. Der Algorithmus benötig zur Feststellung des Nachfolgers folgende Eingangsparameter:
+
+\begin{description}[align=left]
+	\item [Subjekt] für das die nächste Folgeaufgabe bestimmt werden soll
+	\item [Basisaufgabe] letzte Aufgabe die dem Subjekt zugeordnet wurde
+	\item [mögliche Folgeaufgaben] Liste mit Aufgaben welche für die Bestimmung der Folgeaufgabe berücksichtigt werden sollen.
+\end{description}
+
+Anhand dieser Eingangsparameter kann mit dem Algorithmus aus Tabelle \ref{tab:find-followup} der Nachfolger bestimmt werden.	
+
+{\setstretch{1.0}
+\begin{center}
+	\begin{longtabu} to \linewidth {@{}lX@{}} 
+		\textbf{Nr.} & \textbf{Beschreibung} \\ \midrule \endfirsthead
+		\textbf{Nr.} & \textbf{Beschreibung} \\ \midrule \endhead
+		\multicolumn{2}{c}{Fortsetzung auf nächster Seite}
+		\endfoot
+ 	   	\caption{Algorithmus - Folgeaufgabe finden\label{tab:find-followup}}
+ 	   	\endlastfoot
+		1 & Selektiere einen möglichen Nachfolger und speichere diesen untern posFollowup \\ \midrule
+		2 & Prüfe die Kosinusähnlichkeit der Aufgabe posFollowUp \\
+		2.1 & Wenn die Prüfung erfolgreich war gehe zu Schritt 3 \\
+		2.2 & Gehe zu Schritt 6 \\ \midrule
+		3 & Vergleiche die Distanz von Subjekt/Basisaufgabe und Subjekt/Folgeaufgabe \\
+		3.1 & Wenn die Folgeaufgabe weiter vom Subjekt entfernt ist als die Basisaufgabe gehe zu Schritt 4 \\
+		3.2 & Gehe zu Schritt 6 \\ \midrule
+		4 & Prüfe die Kosinusähnlichkeit der Vektoren Subjekt/Basisaufgabe zu Basisaufgabe/Folgeaufgabe \\
+		4.1 & Wenn die Prüfung erfolgreich war gehe zu Schritt 5 \\
+		4.2 & Gehe zu Schritt 6 \\ \midrule
+		5 & Prüfe auf Überschneidung des Vektors Subjekt/Folgeaufgabe mit anderen Subjekten \\
+		5.1 & Wenn die Prüfung erfolgreich war gehe zu Schritt 5.2 ansonst gehe zu Schritt bla \\
+		5.2 & Speichere das Paar Folgeaufgabe mit dem dem Wert der Distanz zwischen Subjekt und Folgeaufgabe in die Liste validFollowUps \\ \midrule
+		6 & Selektiere den nächsten möglichen Nachfolger und speichere diesen unter posFollowUp \\
+		6.1 & wenn posFollowUp existiert gehe zu Schritt 2 \\ \midrule
+		7 & Wenn die Liste validFollowUps nicht leer ist wähle die Aufgabe mit der kleinsten Distanz und gibt diese zurück
+	\end{longtabu}
+\end{center}
+}
+\todo{keine Ahnung wie das geht}
+	
+% subsubsection folgeaufgabe_suchen (end)
+
+
+
+
+
+% subsection erstzuordnung (end)
+
+\section{Subjekte prüfen} % (fold)
+\label{sub:subjekte_prufen}
+Im nächsten Schritt des Algorithmus werden Subjekten denen noch keine Aufgaben zugeordnet sind behandelt. Dabei wird den Subjekten die nächstgelegene Aufgabe zugeordnet. Da diese Aufgabe bereits an ein Subjekt gebunden ist muss die entsprechende Relation gelöscht werden.
+% subsection subjekte_prufen (end)
+
+\section{Zuweisungen verifizieren} % (fold)
+\label{sub:zuweisungen_verifizieren}
+Im abschließenden Schritt werden die vorhandenen Zuordnungen auf Plausibilität geprüft. In diesem Schritt wird für jedes Subjekt geprüft ob es mögliche Folgeaufgaben gibt die eventuell dem falschen Subjekt zugeordnet wurden. Der entsprechende Algorithmus kann der Tabelle \ref{tab:check-plausibility} entnommen werden.
+
+{\setstretch{1.0}
+\begin{center}
+	\begin{longtabu} to \linewidth {@{}lX@{}} 
+		\textbf{Nr.} & \textbf{Beschreibung} \\ \midrule \endfirsthead
+		\textbf{Nr.} & \textbf{Beschreibung} \\ \midrule \endhead
+		\multicolumn{2}{c}{Fortsetzung auf nächster Seite}
+		\endfoot
+ 	   	\caption{Algorithmus - Plausibilität prüfen\label{tab:check-plausibility}}
+ 	   	\endlastfoot
+		1 & Selektiere einen möglichen Nachfolger und speichere diesen untern posFollowup \\ \midrule
+	\end{longtabu}
+\end{center}
+}
+
+% subsection zuweisungen_verifizieren (end)
+
+\chapter{Einschränkungen} % (fold)
+\label{cha:einschrankungen}
+Der Algorithmus bietet grundlegende Möglichkeiten zur Erkennung von gelegten Prozessmodellen. Aktuell gibt es allerdings noch Einschränkungen.
+
+% section einschrankungen (end)
+%% vim:foldmethod=expr
+%% vim:fde=getline(v\:lnum)=~'^%%%%\ .\\+'?'>1'\:'='
+%%% Local Variables: 
+%%% mode: latex
+%%% mode: auto-fill
+%%% mode: flyspell
+%%% eval: (ispell-change-dictionary "en_US")
+%%% TeX-master: "main"
+%%% End: 
