@@ -13,40 +13,40 @@
 
 %% defined an anvironment for the style Keith used to use:
 
-\chapter{Erkennungskriterien sequenzieller Legestrukturen} % (fold)
+\chapter{Erkennung sequenzieller Legestrukturen} % (fold)
 \label{cha:erkennung}
-Nachdem in Kapitel \ref{cha:hintergrund} die Grundlage zum Verständnis von sequenziell gelegten Prozessen in CMB Modellen  dargstellt wurde, werden in diesem Kapitel das notwendige Ausgangsmaterial, die Kritieren bzw. die Strategie zur Erkennung dieser Strukturen untersucht. Diese Erkenntnisse bilden die Basis für den Algorithmus.
+Nachdem in Kapitel \ref{cha:hintergrund} die Grundlage zum Verständnis von sequenziell gelegten Prozessen in CMB Modellen  dargestellt wurde, werden in diesem Kapitel das notwendige Ausgangsmaterial, die Kriterien bzw. die Strategie zur Erkennung dieser Strukturen untersucht. Diese Erkenntnisse bilden die Basis für den Algorithmus.
 
-\section{Allgmeine Einschränkung} % (fold)
+\section{Allgemeine Einschränkung} % (fold)
 \label{sec:allgmeine_einschrankung}
-Ein Algorithmus kann nur Strukturen erkennen die auch ein Mensch ohne genau Kenntnis des eigentlichen Prozesses ableiten kann. Das heißt, dass nur geometrische Anordnungen bei der Erkennung berücksichtigt werden. Diese Anordnungen müssen im weiteresten Sinnen einen linearen sequenziellen Zusammenhang erkennen lassen.
+Der zu entwickelnde Algorithmus kann nur Strukturen erkennen die auch ein Mensch ohne genau Kenntnis des eigentlichen Prozesses ableiten kann. Das heißt, dass nur geometrische Anordnungen bei der Erkennung berücksichtigt werden. Diese Anordnungen müssen im weitesten Sinne einen linearen sequenziellen Zusammenhang erkennen lassen.
 % section allgmeine_einschrankung (end)
 
 \section{Ausgangsmaterial} % (fold)
 \label{sec:ausgangsmeterial}
-Der Algorithmus verarbeitet nicht das Basisbildmaterial direkt, sondern verwendet eine bereits digitalisierte Repräsentation die durch den Model Digtizer erzeugt wird.
+Der Algorithmus verarbeitet nicht das Basisbildmaterial direkt, sondern verwendet eine bereits digitalisierte Repräsentation die durch den \todo{Referenz}Model Digitizer erzeugt wird.
 
-Folgende Daten werden vom \todo{Link}Model Digitizer pro Karte zur Verfügung gestellt und dienen als Ausgangsmaterial für den Algorithmus:
+Folgende Daten werden vom Model Digitizer pro Karte zur Verfügung gestellt und dienen als Eingangsdaten für den Algorithmus:
 \begin{itemize}
 	\item eindeutige Karten-ID
 	\item Kartentyp
-	\begin{description}[align=left]
-		\item [Subjekt] ist eine Person die am Prozess teilnimmt und Aufgaben im Prozess zu erledigen hat.
-		\item [Aufgabe] sind die Tätigkeiten innerhalb eines Prozesses die von Subjekten ausgeführt werden.
-		\item [Austausch] ist eine Nachricht die zwischen Aufgaben bzw. Subjekten ausgetauscht wird.
-	\end{description}
+	\begin{itemize}
+		\item Subjekt
+		\item Aufgabe
+		\item Austausch
+	\end{itemize}
 	\item X- und Y-Koordinaten für die Eckpunkte der Karte. 
 \end{itemize}
 % section ausgangsmeterial (end)
 
 \section{Problemstellungen} % (fold)
 \label{sec:problemstellungen}
-Bei der algorithmischen Auswertung sequenzieller Strukturen auf Basis von digital verarbeiteten Basismeterialien ergeben sich 4 Hauptkriterien die behandelt werden müssen:
+Bei der algorithmischen Auswertung sequenzieller Strukturen ergeben sich 4 Hauptkriterien die bei der Interpretation berücksichtigt werden müssen:
 \begin{enumerate}
 	\item Abweichungen von den Legevorschriften laut CBM.
 	\item Ungenaue Positionierung der Karten.
 	\item Unterschiedliches Ausgangsbildmaterial.
-	\item Fehlerhalfte Interpretation durch den Model Digitizer.
+	\item Fehlerhafte Interpretation durch den Model Digitizer.
 \end{enumerate}
 
 \subsection{Abweichung von der Legevorschriften} % (fold)
@@ -77,27 +77,27 @@ Aus den Testbeispielen haben sich zwei grundsätzliche Legemuster ergeben:
 
 Das Linienlayout entspricht den vorgegebenen Legevorschriften. Beim Sternlayout werden die Vorschriften nicht beachtet und es ergeben sich daraus folgende Problemstellungen:
 \begin{itemize}
-	\item Es kann kein Startelement erkannt werden, da alle Aufgaben ungefähr gleich weit vom nächstgelegenem Subjekt entfernt sind.
-	\item Es ist keine sequenzielle Struktur erkennbar und daher kann kein chronologischer Zusammenhang zwischen den Aufgaben abgeleitet werden.
+	\item Es kann kein Startelement erkannt werden, da alle Aufgaben annähernd gleich weit vom nächstgelegenem Subjekt entfernt sind.
+	\item Es ist keine sequenzielle Struktur ausgehend vom Subjekt erkennbar und daher kann kein chronologischer Zusammenhang zwischen den Aufgaben abgeleitet werden.
 \end{itemize}
 
-Aufgrund dieser Merkmale ist das Sternlayout nicht zur Analyse geeignet und es ergibt sich die Anforderung diese beiden Layouts voneinander unterscheiden zu können.
+Aufgrund dieser Merkmale ist das Sternlayout nicht zur Analyse geeignet, es ergibt sich aber die Anforderung diese beiden Layouts voneinander unterscheiden zu können.
 
-Eine weitere Abweichung betrifft die Anordnung der Subjekte und die Legerichtung der Aufgaben. In Abbildung \ref{fig:subjekt-position} sind die Subjekte entgegen den Vorschriften nicht horizontal auf einer Linie am oberen Bildrand angegeordnet. Abbildung \ref{fig:nicht-vertikal} zeigt, dass die Aufgaben nicht vertikal ausgehend vom Subjekt angeordnet sind.
+Eine weitere Abweichung betrifft die Anordnung der Subjekte und die Legerichtung der Aufgaben. In Abbildung \ref{fig:subjekt-position} sind die Subjekte entgegen den Vorschriften nicht horizontal auf einer Linie am oberen Bildrand angeordnet. Abbildung \ref{fig:nicht-vertikal} zeigt, dass die Aufgaben nicht vertikal ausgehend vom Subjekt angeordnet sind.
 
-Obwohl die Legevorschriften bei beiden Beispielen nicht eingehalten werden, ist die Subjekt/Aufgabe Zuordnung sowie die chronologische Abfolge der Aufgaben klar ersichtlich. Daher sollten diese Muster vom Algorithmus richtig erkannt werden. 
+Obwohl die Legevorschriften bei beiden Beispielen nicht eingehalten werden, sind die chronologischen Subjekt/Aufgabe Zuordnungen klar ersichtlich. Diese Muster sollten vom Algorithmus richtig erkannt werden. 
 
 \begin{figure}[h]
 	\centering 
 	\begin{minipage}[b]{0.45\textwidth} 
 		\includegraphics[width=\textwidth]{figures/03.jpg}
-		\caption{Linienlayout \protect~\cite{max}} 
+		\caption{Subjektposition \protect~\cite{max}} 
 		\label{fig:subjekt-position} 
 	\end{minipage}
 	\hfill 
 	\begin{minipage}[b]{0.45\textwidth} 
 		\includegraphics[width=\textwidth]{figures/17.jpg} 		
-		\caption{Sternlayout \protect~\cite{max}} 
+		\caption{Richtungsunterschiede \protect~\cite{max}} 
 		\label{fig:nicht-vertikal} 
 	\end{minipage}
 \end{figure}
@@ -105,7 +105,7 @@ Obwohl die Legevorschriften bei beiden Beispielen nicht eingehalten werden, ist 
 
 \subsection{Ungenaue Kartenlegung} % (fold)
 \label{ssub:ungenaue_kartenlegung}
-Mit der Methode des Kartenlegen verbunden ist die ungenaue Positionierung und Lage der Karten. In Abbildung \ref{fig:karten-position} ist zum einen ersichtlich, dass die roten Aufgabenkarten nicht exakt unterhalb des Subjekts angeordnet sind, zum anderen ist auch eine Rotation dieser Karten feststellbar. Diese Legeungenauigkeiten sollten vom Algorithmus innerhalb einer bestimmten Toleranz ebenfalls richtig interpretiert werden.
+Mit der Methode des Kartenlegen verbunden ist die ungenaue Positionierung und Lage der Karten. In Abbildung \ref{fig:karten-position} ist ersichtlich, dass die roten Aufgabenkarten nicht exakt unterhalb des Subjekts angeordnet sind, und es ist auch eine Rotation dieser Karten feststellbar. Diese Legeungenauigkeiten sollten vom Algorithmus innerhalb einer bestimmten Toleranz ebenfalls richtig interpretiert werden.
 
 \begin{figure}[h]
 	\centering 
@@ -119,20 +119,20 @@ Mit der Methode des Kartenlegen verbunden ist die ungenaue Positionierung und La
 
 \subsection{Ausgangsbildmaterial} % (fold)
 \label{sub:ausgangsbildmaterial}
-Im ersten Schritt der Digitalisierung wird mit Hilfe von digitalen Aufnahmegeräten ein Bild des Prozesses erstellt. Daraus ergeben sich mehrere Unterschiede im Ausgangsmaterial die potentiell Einfluß auf die algoritmische Auswertung haben:
+Im ersten Schritt der Digitalisierung wird mit Hilfe von digitalen Aufnahmegeräten ein Bild des Prozesses erstellt. Daraus ergeben sich mehrere Unterschiede im Ausgangsmaterial die potentiell Einfluß auf die algorithmische Auswertung haben:
 
 \begin{itemize}
-	\item Auflösung des Bildmeterials
+	\item Auflösung des Bildmaterials
 	\item Perspektive der Aufnahme
 	\item Bildqualität
 \end{itemize}
 
-Die Bildqualität verschlechtert das Ergebnis der Umwandlung in Vektorgrafiken und beeinflußt somit indirekt den Algorithmus. Die Auflösung bzw. Perspektive wirkt sich auf die Größe der Elemente aus und hat direkten Einfluß auf den Algorithmus. Daher soll der Algorithmus grundsätzlich mit qualitativ unterschiedlichen Bildmaterialien umgehen können.
+Die Bildqualität verschlechtert das Ergebnis der Umwandlung in Vektorgrafiken und beeinflußt somit indirekt den Algorithmus. Die Auflösung bzw. Perspektive wirkt sich auf die Größe der Elemente aus und hat direkten Einfluß auf den Algorithmus. Daher soll der Algorithmus grundsätzlich mit unterschiedlichen Bildmaterialien umgehen können.
 % subsection ausgangsbildmaterial (end)
 
 \subsection{Fehlerhafte Basisdaten} % (fold)
 \label{sub:fehlerhafte_basisdaten}
-Für die Erkennung der sequenziellen Strukturen wird auf eine bereits digitalisierte Version der Rohdaten zugegriffen. Daraus ergibt sich, dass eventuelle Fehler im ersten Digitalisierungschritt Auswirkungen auf den Algorithmus haben. Im weiteren wird davon ausgegangen, dass die vorhanden Daten vollständig und richtig sind.
+Für die Erkennung der sequenziellen Strukturen wird auf eine bereits digitalisierte Version der Rohdaten zugegriffen. Daraus ergibt sich, dass eventuelle Fehler im ersten Digitalisierungsschritt Auswirkungen auf den Algorithmus haben. In den folgenden Kapiteln wird davon ausgegangen, dass die vorhanden Daten vollständig und richtig sind.
 % subsection fehlerhafte_basisdaten (end)
 % section problemstellungen (end)
 
@@ -140,17 +140,17 @@ Für die Erkennung der sequenziellen Strukturen wird auf eine bereits digitalisi
 
 \section{Erkennungsstrategie} % (fold)
 \label{sec:erkennungsstrategie}
-Aus den in Kapitel \ref{cha:erkennung} gewonnenen Erkenntnissen wird in diesem Kapitel eine Grundlegende Strategie zur Erkennung von sequenziell gelegten Prozessen vorgestellt, die als Basis für den Algorithmus dient.
+Aus den gewonnenen Erkenntnissen und dem bestehendem Algorithmus \cite{max} wird eine grundlegende Strategie zur Erkennung von sequenziell gelegten Prozessen vorgestellt, die als Basis für den Algorithmus dient.
 
-\subsection{Unterscheidung der Legemethode} % (fold)
+\subsection{Bestehender Algorithmus} % (fold)
 \label{sub:unterscheidung_der_legemethode}
 
 % subsection unterscheidung_der_legemethode (end)
-\citet{max} schlägt für die Erkennung der Abhängigkeiten zwei Methoden vor:
+\citet{max} schlägt für die Erkennung der Abhängigkeiten die folgenden Algorithmusbestandteile vor:
 \begin{description}
-	\item[Euklidscher Abstand] Die Aufgaben werden dem Subjekt zugeordnet, zudem die Aufgabe den geringsten Abstand aufweist.
-	\item[Klassifizierung über Quadranten] Für jedes Subjekt werden Quadranten gebildet, und die Aufgaben werden dem Subjekt zugeordnet in desem Quadranten die Aufgabe liegt.
-	\item[Kombination] Die beiden zuvor genannten Methoden werden kombiniert betracht um mögliche Falschzuweisungen zu ermitteln.
+	\item[Euklidischer Abstand] Die Aufgaben werden dem Subjekt zugeordnet, zudem die Aufgabe den geringsten Abstand aufweist.
+	\item[Klassifizierung über Quadranten] Für jedes Subjekt werden Quadranten gebildet, und die Aufgaben werden dem Subjekt zugeordnet in dessen Quadranten die Aufgabe liegt.
+	\item[Kombination] Die beiden zuvor genannten Methoden werden kombiniert betrachtet um mögliche Falschzuweisungen zu ermitteln.
 	\item[Chronologische Ordnung] die chronologische aufeinanderfolge der Aufgaben wird durch den Abstand zum Subjekt bestimmt.
 \end{description}
 
@@ -158,24 +158,24 @@ Zur Verbesserung der Erkennungsgenauigkeit sind weitere Kriterien bzw. Annahmen 
 
 \subsection{Anfangselement} % (fold)
 \label{sub:anfangselement}
-Als Einstiegspunkt für den Algorithmus muss eine Subjekt/Aufgabe Kombination ermittelt werden. Die Kombination mit dem geringsten Abstand zwischen Subjekt und Aufgabe ist der wahrscheinlichste Start des Prozesses und somit der beste Ausgangspunkt um die weiteren Abhängikeiten zu bestimmen.
+Als Einstiegspunkt für den Algorithmus muss eine Subjekt/Aufgabe Kombination ermittelt werden. Die Kombination mit dem geringsten Abstand zwischen Subjekt und Aufgabe ist der wahrscheinlichste Start des Prozesses und somit der beste Ausgangspunkt um die weiteren Abhängigkeiten zu bestimmen.
 \subsection{Richtungsbestimmung} % (fold)
 \label{sub:richtungsbestimmung}
-Bei einer sequenziell gelegten Anordnung ist eine annähernd gleiche Richtung der Aufgaben zu ihrem Startelement eine Bedingung. Diese Bedingung wurde beim bisherigen Ansatz nur teilweise bei der Klassifizierung nach Quadranten berücksichtigt, wobei diese Methode nur eine fixe Richtung berücksichtigt. Der euklidsche Abstand beinhaltet keine derartige Information. Um diese Bedingung abbilden zu können ist eine weitere Metrik notwendig. Eine Möglichkeit ist die Verwendung der Kosinusähnlichkeit (siehe Formel  \ref{eq:cosinesimilarity}) als weitere Metrik. Die Kosinusähnlichkeit beschreibt die Richtungsabweichung von zwei Vektoren.
+Bei einer sequenziell gelegten Anordnung ist eine annähernd gleiche Richtung der Aufgaben zu ihrem Startelement eine Bedingung. Diese Bedingung wurde beim bisherigen Ansatz nur teilweise bei der Klassifizierung nach Quadranten berücksichtigt, wobei diese Methode nur eine fixe Richtung berücksichtigt. Der euklidische Abstand beinhaltet keine derartige Information. Um diese Bedingung abbilden zu können ist eine weitere Metrik notwendig. Es wird die Verwendung der Kosinusähnlichkeit (siehe Formel  \ref{eq:cosinesimilarity}) als weitere Metrik vorgeschlagen. Die Kosinusähnlichkeit beschreibt die Richtungsabweichung von zwei Vektoren.
 
 \begin{equation}
 \label{eq:cosinesimilarity}
 \cos(\theta) = {\mathbf{A} \cdot \mathbf{B} \over \|\mathbf{A}\| \|\mathbf{B}\|} = \frac{ \sum\limits_{i=1}^{n}{A_i  B_i} }{ \sqrt{\sum\limits_{i=1}^{n}{A_i^2}}  \sqrt{\sum\limits_{i=1}^{n}{B_i^2}} }
 \end{equation}
 
-Der Wertebereich der Kosinusähnlichkeit geht von $-1$ bis $+1$, wobei bei $-1$ die Vektoren genau entgegengesetzt verlaufen und bei $+1$ die Richtung beider Vektoren genau gleich ist. Ein Wert von $0$ bedeutet dass die Vektoren genau unter $90^{\circ}$ zueinander stehen.
+Der Wertebereich der Kosinusähnlichkeit geht von $-1$ bis $+1$, wobei bei $-1$ die Vektoren genau entgegengesetzt verlaufen und bei $+1$ die Richtung beider Vektoren genau gleich ist. Ein Wert von $0$ bedeutet dass die Vektoren genau unter $90^{\circ}$ zueinander stehen. Chronologisch sequenziell folgenden Aufgaben haben somit einen Wert zwischen $0$ und $1$.
 \todo{Bild zur Veranschaulichung}
 % subsection richtungsbestimmung (end) 
 % subsection anfangselement (end)
 % section erkennungsstrategie (end)
 \subsection{Ausgleich der Bildgröße}
 \label{sub:grunddaten}
-Um die Einflüsse von unterschiedlichen Ausgangsdaten muss sichergestellt werden, dass der Algorithmus unabhängig vom verwendeten Aufnahmegerät bzw. den Aufnahmeparameter verwendbar ist.
+Um die Einflüsse von unterschiedlichen Ausgangsdaten zu reduzieren muss sichergestellt werden, dass der Algorithmus unabhängig vom verwendeten Aufnahmegerät bzw. den Aufnahmeparameter verwendbar ist.
 Mit Hilfe der Eckpunktkoordinaten der Karten kann eine Berechnung in Relation zur Kartengröße erfolgen. Damit wird eine Normalisierung der Bilddaten erreicht.
 
 % section zusammenfassung (end)

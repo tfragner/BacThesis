@@ -428,11 +428,6 @@ INPUT main.lot
 OUTPUT main.lot
 INPUT einleitung.tex
 INPUT einleitung.tex
-INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/adobe/palatino/pplb9o.tfm
-INPUT /usr/local/texlive/2017/texmf-dist/fonts/vf/adobe/palatino/pplb9o.vf
-INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/mathpazo/fplmb.tfm
-INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/adobe/palatino/pplb8r.tfm
-INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/adobe/palatino/pplbj8r.tfm
 INPUT hintergrund.tex
 INPUT hintergrund.tex
 INPUT figures/cbm-grundstruktur.png
@@ -443,6 +438,11 @@ INPUT empfehlungen.tex
 INPUT analyse.tex
 INPUT analyse.tex
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/adobe/palatino/pplb9o.tfm
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/vf/adobe/palatino/pplb9o.vf
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/public/mathpazo/fplmb.tfm
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/adobe/palatino/pplb8r.tfm
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/tfm/adobe/palatino/pplbj8r.tfm
 INPUT figures/linienlegemethode.jpg
 INPUT ./figures/linienlegemethode.jpg
 INPUT ./figures/linienlegemethode.jpg
@@ -588,6 +588,7 @@ INPUT main.run.xml
 OUTPUT main.run.xml
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/enc/dvips/base/8r.enc
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb
+INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmmi10.pfb
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr10.pfb
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmss12.pfb
 INPUT /usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmssbx10.pfb

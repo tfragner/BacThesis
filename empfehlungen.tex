@@ -15,31 +15,30 @@
 
 \chapter{Verständlichkeit von Card Based Modeling}
 \label{chap:Empfehlungen}
-In diesem Kapitel wird die erste Forschungsaufgabe behandelt. Die Methode des Card Based Modelling \citep{Oppl:2015:ASB:2723839.2723841} wird auf die einfache Verständlichkeit der Notation überprüft.
+In diesem Kapitel wird die erste Forschungsaufgabe behandelt. Die Methode CBM \citep{Oppl:2015:ASB:2723839.2723841} wird auf die einfache Verständlichkeit der Notation und den zugrundeliegenden Modellierungsvorschriften überprüft.
 
 \citeauthor{MENDLING2010127} definiert die folgenden Kriterien die zur einfachen Verständlichkeit von Prozessmodellen erfüllt werden sollten:
 \begin{enumerate}
 	\item G1 Verwendung soweniger Elemente wie möglich.
 	\item G2 Geringe Anzahl der ein- und ausgehenden Verbindungen pro Element.
 	\item G3 Ein Anfangs- und Endelement.
-	\item G4 Struktiertheit des Modell.
+	\item G4 Strukturiertheit des Modell.
 	\item G5 Vermeidung von ODER Verzweigungen.
 	\item G6 Verwendung von Verb/Objekt Beschreibungen.
 	\item G7 Dekomposition bei mehr als 50 Elementen.\citep{MENDLING2010127}
 \end{enumerate}
 
-Im Folgenden wird für die einzelnen Punkte beschrieben inwiefern diese beim Card Based Modeling erfüllt werden.
+Im Folgenden wird für die einzelnen Punkte beschrieben inwiefern diese beim Card Based Modeling erfüllt werden:
 
 \begin{enumerate}
-	\item wird erfüllt, da beim Card Based Modelling meist auf einer höheren Abstraktionsebene modelliert wird und die Möglichkeiten von Verzweigungen nicht vorgesehen sind. Daraus folgt, dass die potenzielle Anzahl von Elementen in einem CBM Modell eher niedrig ist. Weiters wird die Anzahl meist durch die beschränkten Platzverhältnisse beim Modellieren beeinflußt. 
-	\item wird erfüllt, da es sich um ein Sequenzielles Modell handelt und damit verbunden gibt es nur einen Ein- bzw. Ausgang pro Aufgabe.
-	\item Aufgrund der fehlenden Gateway Elemente im CBM ist die Anzahl der ein- und ausgehenden Verbindungen niedrig. 
+	\item wird erfüllt, da bei CBM meist auf einer höheren Abstraktionsebene modelliert wird, und die Möglichkeiten von Verzweigungen nicht vorgesehen sind. Daraus folgt, dass die potenzielle Anzahl von Elementen in einem CBM Modell eher niedrig ist. Weiter wird die Anzahl meist durch die beschränkten Platzverhältnisse beim Modellieren beeinflußt. 
+	\item wird erfüllt, da es sich um ein sequenzielles Modell handelt und damit verbunden gibt es im Normalfall nur einen Ein- bzw. Ausgang pro Aufgabe.
 	\item wir erfüllt, da aufgrund der sequenziellen Natur der Modellierungssprache meist nur ein Start- bzw. Endelement existiert.
 	\item wird erfüllt, da es keine Notationselemente zum splitten (Gateways) des Prozesspfades gibt. 
-	\item wird ebenfalls erfüllt, da es keine ensprechenden Notationselement gibt. 
+	\item wird erfüllt, da es kein entsprechendes Notationselement gibt. 
 	\item kann erfüllt werden, da es sich hierbei um eine formale Richtlinie handelt.
-	\item Die siebte Regel ist unabhängig von der verwendeten Notation.
+	\item Die siebte Regel ist unabhängig von der verwendeten Notation und kann in jedem Fall erfüllt werden.
 \end{enumerate}
 
-Die Analyse von CBM nach den Regeln von \citet{MENDLING2010127} legt nahe, dass CBM für das Verständis durch die beteiligten Personen sehr gut geeignet ist. Wie in der Einleitung bereits beschrieben ist jedoch eine digitale Representation der gelegten Prozessmodelle eine wichtiger Aspekt um die Weiterverwendung zu gewährleisten. Im folgenden Kapitel wird beschrieben welche Konstellationen basierend auf den Beispielen von \citet{max} bei der Analyse berücksichtigt werden sollen.
+Die Analyse von CBM nach den Regeln von \citet{MENDLING2010127} legt nahe, dass CBM für das Verständnis durch die beteiligten Personen sehr gut geeignet ist. Wie in der Einleitung bereits beschrieben, ist jedoch eine digitale Repräsentation der gelegten Prozessmodelle eine wichtiger Aspekt um die Weiterverwendung zu gewährleisten. Im folgenden Kapitel wird beschrieben welche Konstellationen, basierend auf den Testbeispielen von \citet{max}, bei der Analyse berücksichtigt werden sollen.
 

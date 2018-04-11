@@ -15,11 +15,20 @@
 
 \chapter{Tests und Ergebnisse}
 \label{chap:Ergebnisse}
-Im vorangegangen Kapitel \ref{cap:algorithmus} wurde der Algorithmus für die Zuordnung von Aufgaben zu Subjekten beschrieben. Dieses Kapitel zeigt die Ergebnisse des Algorithmus basierend auf den Testfällen \todo{Max} Link um eine Vergleichbarkeit der Algorithmen zu gewährleisten. 
+Im vorangegangen Kapitel \ref{cap:algorithmus} wurde der Algorithmus für die Zuordnung von Aufgaben zu Subjekten beschrieben. Dieses Kapitel zeigt die Ergebnisse des Algorithmus basierend auf den Testfällen \cite{max}. Für den Test wurde der Algorithmus prototypisch in JAVA implementiert. Der Source Code ist in Github unter https://github.com/tfragner/interpreter-algorithm verfügbar.
 
-\section{Testergenisse} % (fold)
+Anhand der Testfälle werden die Kriterien aus Kapitel \ref{cha:erkennung} sowie die Implementierung des Algorithmus aus Kapitel \ref{cap:algorithmus} geprüft. Die Folgenden Testfälle werden durch die Testfälle abgebildet: 
+\begin{description}
+	\item[Layout] Die Unterscheidung von Stern- und Linienlayout
+	\item[Subjektanordnungen] die nicht den Legevorschriften nach CBM entsprechen
+	\item[Legerichtung] Unterschiedliche Richtung der einzelnen Prozesspfade pro Subjekt
+	\item[Positionierungsungenauigkeiten] Abweichungen in der Linearität der Aufgaben und Rotation der Karten
+	\item[Ausgangsmaterial] Alle Beispiele basieren auf unterschiedlichem Basismaterial (Qualität und Größe)
+\end{description}
+\newpage
+\section{Testergebnisse} % (fold)
 \label{sec:testergenisse}
-
+Die Testergebnisse sind in Tabelle \ref{tab:results} aufgelistet. Die Spalte \textbf{erkannt} gibt an ob das Ergebnis des Algorithmus dem erwarteten Ergebnis entspricht.
 {\setstretch{1.0}
 \begin{center}
 	\begin{longtabu} to \linewidth {@{}p{.05\linewidth}m{.2\linewidth}p{.1\linewidth}m{.5\linewidth}@{}} 
@@ -27,17 +36,17 @@ Im vorangegangen Kapitel \ref{cap:algorithmus} wurde der Algorithmus für die Zu
 		\textbf{Nr.} & \textbf{Bild} & \textbf{erkannt} & \textbf{Beschreibung}\\ \midrule \endhead
 		\multicolumn{4}{c}{Fortsetzung auf nächster Seite}
 		\endfoot
- 	   	\caption{Algorithmus - Plausibilität prüfen\label{tab:results}}
+ 	   	\caption{Testergebnisse\label{tab:results}}
  	   	\endlastfoot
 		1 & \includegraphics[width=\linewidth]{figures/01.jpg} & Ja & Dieses Beispiel entspricht den Kriterien der Legetechnik. \\
 		\midrule
-		2 & \includegraphics[width=\linewidth]{figures/02.jpg} & Ja & In diesem Beispiel ist ersichtlich, dass die Karten nicht exakt vertikal angeordnet sein müssen. \\
+		2 & \includegraphics[width=\linewidth]{figures/02.jpg} & Ja & In diesem Beispiel ist ersichtlich, dass die Karten nicht exakt vertikal angeordnet sein müssen und die Rotation der Karten keinen Einfluss auf das Ergebnis hat. \\
 		\midrule
-		3 & \includegraphics[width=\linewidth]{figures/03.jpg} & Ja & Die Lage der Subjekte ist für den Algorithmus nicht entscheidend. \\
+		3 & \includegraphics[width=\linewidth]{figures/03.jpg} & Ja & Die Zuordnungen werden richtig erkannt obwohl die Anordnung der Subjekt nicht den Legevorschriften entspricht. \\
 		\midrule
-		4 & \includegraphics[width=\linewidth]{figures/04.jpg} & Ja & Dieses Beispiel ist dem Anschein nach als Sternmuster gelegt. Dennoch wird das Muster erkannt, da die Aufgaben jedes Subjekts in Linie gelegt sind. \\
+		4 & \includegraphics[width=\linewidth]{figures/04.jpg} & Ja & Dieses Beispiel ist dem Anschein nach als Sternlayout gelegt. Dennoch wird das Muster erkannt, da die Aufgaben jedes Subjekts in Linie gelegt sind. \\
 		\midrule
-		5 & \includegraphics[width=\linewidth]{figures/05.jpg} & Ja & Der Testfall wird als Sternmuster erkannt. \\
+		5 & \includegraphics[width=\linewidth]{figures/05.jpg} & Ja & Der Testfall wird als Sternlayout erkannt. \\
 		\midrule
 		6 & \includegraphics[width=\linewidth]{figures/06.jpg} & Ja & Der Testfall wird richtig erkannt. Die horizontale Ausrichtung der Aufgaben wirkt sich nicht auf das Ergebnis des Algorithmus aus. \\
 		\midrule
@@ -47,7 +56,7 @@ Im vorangegangen Kapitel \ref{cap:algorithmus} wurde der Algorithmus für die Zu
 		\midrule
 		9 & \includegraphics[width=\linewidth]{figures/09.jpg} & Ja & Entspricht in Bezug auf den Algorithmus dem Testfall 8. \\
 		\midrule
-		10 & \includegraphics[width=\linewidth]{figures/10.jpg} & Ja & Dieses Beispiel ist scheinbar auch ein Sternmuster, wird aber korrekt als Linienmuster erkannt. In diesem Fall ist wird besonders die Funktionalität der Verifizierung geprüft. \\
+		10 & \includegraphics[width=\linewidth]{figures/10.jpg} & Ja & Dieses Beispiel ist scheinbar ein Sternlayout, wird aber korrekt als Linienlayout erkannt. In diesem Fall wird besonders die Funktionalität der Verifizierung geprüft. \\
 		\midrule
 		11 & \includegraphics[width=\linewidth]{figures/11.jpg} & Ja & Entspricht in Bezug auf den Algorithmus dem Testfall 10.  \\
 		\midrule
@@ -67,8 +76,6 @@ Im vorangegangen Kapitel \ref{cap:algorithmus} wurde der Algorithmus für die Zu
 \end{center}
 }
 
-Die Ergebnisse zeigen, dass der Algorithmus für die vorgegebenen Beispiele fehlerfrei funktioniert. 
-
-% section testergenisse (end)
+Die Ergebnisse zeigen, dass der Algorithmus für alle Testfälle fehlerfrei funktioniert.
 
 

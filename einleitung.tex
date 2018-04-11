@@ -4,85 +4,44 @@
 %
 %  Author  :  Thomas Fragner
 % 
-%  Created :  27 May 93
+%  Created :  2017-10-01
 % 
-%  Changed :  19 Feb 2004
+%  Changed :  2018-04-10
 % 
-% styling and technical implementation adopted 2011 by Karl Voit
 %----------------------------------------------------------------
 
-%% defined an anvironment for the style Keith used to use:
-
 \chapter{Einleitung}
-\label{chap:Einleitung}
-Business Process Management (BPM) ist seit Jahren das Interessensgebiet vieler wissenschaftlicher Arbeiten in einem weiten Spektrum von Disziplinen, sowie ein treibender Faktor in der Industrie\cite{vanderAalst2016}. Ein wichtiger Bestandteil von BPM ist die Analyse und Modellierung von Prozessen, speziell während der Einführungsphase von BPM in Unternehmen. Die Verständlichkeit von Prozessmodellen ist ein wichtiger Aspekt, und wird vom persönlichen Prozessmodellierungswissen der Beteiligten und der Komplexität der Prozessmodelle beeinflußt \cite{reijers_study_2011}. \citet{MENDLING2010127} beschreiben allgemeine Regeln zur Verständlichkeit von Modellen die unabhängig von der gewählten Notation gültig sind wie z.B. Größe der Modelle und Struktur der Verzweigungen. Ein weiterer Aspekt der die Verständlichkeit beeinflußt ist der Abtrakttionsgrad der Modelle.
+\label{cha:einleitung}
+Business Process Management (BPM) ist seit Jahren das Interessengebiet vieler wissenschaftlicher Arbeiten in einem weiten Spektrum von Disziplinen, sowie ein treibender Faktor in der Industrie \cite{vanderAalst2016}. Ein wichtiger Bestandteil von BPM ist die Analyse und Modellierung von Prozessen, beginnend mit der Einführungsphase von BPM in Unternehmen. Die Verständlichkeit von Prozessmodellen ist zu jedem Zeitpunkt ein wichtiger Aspekt, und wird vom persönlichen Prozessmodellierungswissen der beteiligten Personen und der Komplexität der Prozessmodelle beeinflusst \cite{reijers_study_2011}. \citet{MENDLING2010127} beschreiben allgemeine Regeln zur Verständlichkeit von Modellen, die unabhängig von der gewählten Notation gültig sind, wie z.B. Größe der Modelle und die Struktur der Verzweigungen. Ein weiterer Aspekt der die Verständlichkeit beeinflusst ist der Abstraktionsgrad der Modelle. Nach \citet{vanderAalst2016} soll bei der Modellierung von Prozessen der Abstraktionsgrad des Modells den Anforderungen entsprechen, und der Fokus auf den Prozessen und nicht auf der Erstellung exakter und detaillierter Modell liegen, da z.B. beim Redesign von Prozessen anfänglich ein abstraktes Modell ausreichend ist. Dies ist potenziell auch für die Erstanalyse von Prozessen gültig. 
 
-Nach \citet{vanderAalst2016} soll bei der Modellierung von Prozessen der Abstraktionsgrad des Modells den Anforderungen ensprechen, und der Fokus auf den Prozess und nicht auf der Modellierung liegen, da z.B. beim Redesign von Prozessen anfänglich ein abstraktes Modell ausreichend ist. Dies ist potenziell auch für die Erstanalyse von Prozessen der Fall. 
+\citet{Oppl:2015:ASB:2723839.2723841} beschreibt ein System zur Modellierung und Dokumentation von Prozessen, in dem vor allem Wert auf die aktive Partizipation der beteiligten Personen Wert gelegt wird, und schlägt hierzu eine Technik mit einer einfachen auf Kartenlegung basierenden Modellierungsmethode vor, welche zur Prozessmodellierung nur Subjekte (ausführende Personen/Rollen), Aufgaben, Austauschelemente (Nachrichten) und Verbindungselemente (Pfeile) verwendet, sowie einen Workflow zur Transformation nach in ein ausführbares S-BPM Modell. Folgend wird diese Methode als Card Based Modeling (CBM) bezeichnet. Aufgrund der geringen Anzahl an Notationselementen eignet sich diese Methode für die Darstellung von Prozessen mit hohem Abstraktionsgrad. Die Notwendigkeit der Transformation in ein automatisiert verarbeitbares S-BPM Modell wurde bereits durch einen Algorithmus realisiert mit dem Ergebnis, dass es noch Potential zur Verbesserung bei der Prozesserkennung gibt \cite{max}. 
 
-\citet{Oppl:2015:ASB:2723839.2723841} beschreibt ein System zur Prozessmodellierung und Dokumentation, in dem vor allem Wert auf die aktive Partizipation der Beteiligten Wert gelegt wird, und schlägt hierzu eine Technik mit einer einfachen auf Kartenlegung basierenden Modellierungsmethode vor, welche zur Prozessmodellierung nur Subjekte (ausführende Personen), Aufgaben, Austauschelemente (Nachrichten) und Verbindungselemente (Pfeile) verwendet, sowie einen Workflow zur Transformation nach S-BPM. Folgend wird dies Moethode als Card Based Modeling (CBM) bezeichent. Aufgrund der geringen Anzahl an Notationsmöglichkeiten eigenet sich diese Methode für die Darstellung von Prozessen mit hohem Abstraktionsgrad. Die Transformation in ein automatisiert verarbeitbares S-BPM Modell wurde bereits durch einen Algorithmus realisiert mit dem Ergebnis, dass es noch Potiential zur Verbesserung bei der Strukturerkennung gibt\citet{max}. 
+Die Notationselemente von CBM beschränken sich auf Elemente zur Darstellung von Aufgaben und deren Abhängigkeiten unter Berücksichtigung der ausführenden Personen welche oftmals auch als Lanes/Pools dargestellt werden. Nach \citet{Muehlen2013} sind Aufgaben, Verbindungen und Personen/Rollen die gebräuchlichsten Elemente in der Prozessmodellierung. Die Abhängigkeit von Aufgaben wird in CBM durch die sequenzielle Anordnung der Aufgaben dargestellt. Sequenzielle Anordnungen sind auch in vielen anderen Modellierungssprachen zu finden.
 
-%Um eine möglichste fehlerfreie Erkennung und daraus folgenden einfache digitale Verarbeitung der Prozesse zu ermöglichen ist eine Anpassung bzw. Erweiterung des bestehenden Algorithmus notwendig.%
-
-Die Notationselemente von CBM beschränken sich auf Elemente zur Darstellung von Aufgaben und deren Abhängigkeiten unter Berücksichtigung der ausführenden Personen welche oftmals als Lanes/Pools dargstellt werden. Nach \citet \todo{Quelle fehlt} sind dies die gebrächlichsten Elemente in der Prozessmodellierung. Die Abhängigkeit von Aufgaben wird in CBM meist durch die sequenzielle Anordnung dargestellt. Sequenzielle Anordnungen sind auch in vielen anderen Modellierungssprachen zu finden.
-
-Für die Transformation von CBM Modellen in digitale Representationen ist daher die Erkennung von sequenziellen Kartenanordnungen ein wichtiger Bestandteil. Daraus leitet sich die Notwendigkeit eines Algorithmus zur Erkennung eben dieser Anordnungen ab.
+Für die Transformation von CBM Modellen in digitale Repräsentationen ist daher die Erkennung von sequenziellen Kartenanordnungen ein wichtiger Bestandteil. Daraus leitet sich die Notwendigkeit eines Algorithmus zur möglichst fehlerfreien Erkennung eben dieser Anordnungen im Zuge der Digitalisierung ab.
 
 \section{Forschungsaufgabe} % (fold)
-Aus der Notwendigkeit eines Algorithmus zur Erkennung von sequenziell gelegten Prozessmodellen ergeben sich die folgenden Forschungsaufgaben:
+\label{sec:forschungsaufgabe}
+Aus der Notwendigkeit eines Algorithmus zur Erkennung von sequenziellen Abläufen in gelegten Prozessmodellen ergeben sich die folgenden Forschungsaufgaben:
 
 \begin{enumerate}
-	\item Um die Relevanz der Schaffung eines Algorithmus zu untermauern wird gezeigt, dass CBM nach den Regeln von \citet{MENDLING2010127} eine einfach verständliche Modellingssprache ist.
-	\item Im Zuge der Digitalisierung von gelegten Prozessmodellen ist somit die Erkennung von sequenziellen Abläufen essenziell, da weitere Abhängigkeiten nur auf Basis der fehlerfreien Erkennung dieser Strukturen richtig erkannt werden können. Ziel dieser Arbeit ist die Entwicklung eines allgemeinen Algorithmus zur Erkennung von sequenziell angeordneten Karten in gelegten Prozessmodellen anhand der Card Based Modelling Methode von \citet{oppl2016linking} unter Berücksichtigung bestehender Erkenntnisse \cite{max}, welche auch für andere derart gelagerte Problemstellungen in seinen Grundzügen verwendet werden kann.
+	\item Um die Relevanz der Schaffung eines Algorithmus zu untermauern wird gezeigt, dass CBM und ähnliche Modellierungsmethoden nach den Regeln von \citet{MENDLING2010127} einfach verständliche Modellierungssprachen sind.
+	\item Im Zuge der Digitalisierung von gelegten Prozessmodellen ist die Erkennung von sequenziellen Abläufen essenziell, da weitere Abhängigkeiten nur auf Basis einer fehlerfreien Erkennung dieser Strukturen richtig erkannt werden können. Ziel dieser Arbeit ist somit die Entwicklung eines allgemeinen Algorithmus zur Erkennung von sequenziell angeordneten Karten in gelegten Prozessmodellen anhand der CBM Methode von \citet{oppl2016linking} unter Berücksichtigung bestehender Erkenntnisse \cite{max}, welche auch für andere derart gelagerte Problemstellungen in seinen Grundzügen verwendet werden kann.
 \end{enumerate}
-\label{sec:forschungsaufgabe}
 % section forschungsaufgabe (end)
 
 \section{Methodik} % (fold)
 \label{sec:methodik}
-Zur Beantwortung der ersten Forschungsaufgabe wird das CBM nach den Regelen von \citet{MENDLING2010127} analysiert.
+Zur Bearbeitung der ersten Forschungsaufgabe wird CBM nach den Regeln von \citet{MENDLING2010127} analysiert.
 
-Für die Beantwortung der zweiten Forschungsaufgabe werden die nachstehenden Schritte durchgeführt:
+Für die Bearbeitung der zweiten Forschungsaufgabe werden die nachstehenden Schritte durchgeführt:
 \begin{enumerate}
-	\item Analyse der Kritierien für die Erkennung von sequenziell gelegten Abfolgen.
+	\item Analyse der Kriterien für die Erkennung von sequenziell gelegten Prozessabfolgen.
 	\item Entwicklung einer Erkennungsstrategie anhand der gefunden Kriterien.
 	\item Erstellung eines abstrakten Algorithmus.
-	\item Verifizierung des Algorithmus anhand der Testbeispiele nach \citet{max}.
+	\item Verifizierung des Algorithmus anhand von bestehenden Testbeispielen \cite{max}.
 \end{enumerate}
 % section methodik (end)
 
-%XYZ beschreibt, dass es oftmals nicht erforderlich ist exakte Abbildungen von Prozessen zu erstellen. Ein Prozess soll speziell am Anfang den Stakeholdern helfen ein Bild von den Prozessen zu bekommen. Dies wird von XYZ in der Form beschrieben, dass die Komplexität der Darstellung den Anforderungen entpsrechen soll.
+% chapter einleitung (end)
 
-%BlaBla gibt in seiner Arbeit an, dass eine Hemmschwelle bei der Etablierung von Prozessen das Problem der Verständlichkeit der verwendeten Notationen ist. Gerade für Personen die nicht mit Modellierungssprachen vertraut sind ist es notwendig eine Notation zu verwenden die einfach verständlich ist. GGG gibt hierfür Richtlinien an denen die Einfachheit von Prozessmodellen analysiert werden kann. Das Modellierungskonzept von Stefan Oppl erfüllt weitestgehend diese Anforderungen.  
-
-%Eine weitere Anforderung an Prozessmodelle ist die digitale Verarbeitbarkeit. Dies wurde von SO auch als 
-
-%Basierend auf diesen Arbeiten ist ersichtlich, dass die Erkennung von sequenziell gelegeten Prozessen nach einem Algorithmus verlangt, der fehlertolerant arbeitet. Prozesse sind unabhängig von der verwendeten Notation meist eine sequenzielle Anordnung von Aufgaben die Subjekten zugeordnet sind. Dies ist beispielsweise auch bei einfachen BPMN Modellen ersichtlich. 
-
-%Ziel dieser Arbeit ist ein Algorithmus welcher eine fehlertolerante Erkennung von sequenziell gelegten Prozessmodellen ermöglicht. Basierend auf dem Card Based Modelling Ansatz von SO werden für den Algorithmus nur Subjekte und Aufgaben berücksichtigt. 
-
-
-%Komplexere Modelle und Frameworks
-
-%Weniger verständlich
-
-%Prozesse sollen digital sein
-
-%Wegen Weiterverarbeitung
-
-%Einfaches Framework mit einfachen Mitteln ohne Modellierungswissen
-
-%Einfach anhand der Kartenlegemethode von Stefan
-
-%Nachteil nicht digital
-
-%Schon einiges bzgl der Umwandelbarkeit gemacht
-
-%Dabei gibt es bei der Erkennung noch Verbesserungspotential
-
-%Anhand der 7 Regeln erklären, dass die Legemethode den Ansprüchen sehr nahe kommt.
-
-%Serielle Abfolge ist bei diesem Modell immanent 
-
-%Daher sollen serielle Abfolgen erkannt werden. Auch Vergleich mit Swimlanes
-
-%Dieses Kapitel soll zeigen, dass Card Based Modelling die Regeln von Erfüllt

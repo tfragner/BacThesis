@@ -2,18 +2,20 @@
 Vmessages
 p1
 (lp2
-VWARNING einleitung.tex:26 \u2014 LaTeX Warning: Citation '\u005ctodo' on page 2 undefined on input line 26.
+VCould not find any messages containing line information.
 p3
-asVfiles_with_guttermarks
+aVPlease take a look at the log file main.latexmk.log to find the source of the problem.
 p4
+asVfiles_with_guttermarks
+p5
 c__builtin__
 set
-p5
-((lp6
-V/Users/fragner/Google Drive/Studium/Bachelorarbeit/bac-latex/./analyse.tex
-p7
-aV/Users/fragner/Google Drive/Studium/Bachelorarbeit/bac-latex/einleitung.tex
+p6
+((lp7
+V/Users/fragner/Google Drive/Studium/Bachelorarbeit/bac-latex/./ergebnisse.tex
 p8
-atp9
-Rp10
+aV/Users/fragner/Google Drive/Studium/Bachelorarbeit/bac-latex/./algorithmus.tex
+p9
+atp10
+Rp11
 s.
