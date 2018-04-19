@@ -71,7 +71,7 @@
 \newcommand{\mybiblatexdashed}{false}  %% "true" or "false"
 %% If true: replace recurring reference authors with a dash.
 
-\newcommand{\mybiblatexbackref}{false}  %% "true" or "false"
+\newcommand{\mybiblatexbackref}{true}  %% "true" or "false"
 %% If true: create backward links from reference to citations.
 
 \newcommand{\mybiblatexfile}{references-biblatex.bib}
@@ -112,7 +112,7 @@
 %% Load main settings for document preamble:
 \input{template/preamble}%% DO NOT REMOVE THIS LINE!
 
-\setboolean{myaddcolophon}{true}  %% "true" or "false"
+\setboolean{myaddcolophon}{false}  %% "true" or "false"
 %% If set to "true": a colophon (with notes about this document
 %% template, LaTeX, ...) is added after the title page.
 %% Please do not set to "false" without a good reason. The colophon
@@ -137,29 +137,29 @@
 \newcommand{\myauthorwithexistingtitles}{\myauthor{}}  %% including
                                 %% university degree already held
                                 %% (BSc, MSc, ...)
-\newcommand{\mytitle}{TITLE}  %% also used for PDF metadata (hyperref)
+\newcommand{\mytitle}{Erkennung sequenzieller Prozessabfolgen}  %% also used for PDF metadata (hyperref)
 \newcommand{\mysubject}{SUBJECT}  %% also used for PDF metadata (hyperref)
 \newcommand{\mykeywords}{KEYWORDS}  %% also used for PDF metadata (hyperref)
 
 %% this information is used only for generating the title page:
-\newcommand{\myworktitle}{Master's Thesis}  %% official type of work like ``Master theses''
+\newcommand{\myworktitle}{Bachelorarbeit}  %% official type of work like ``Master theses''
 \newcommand{\mygrade}{Bachelor of Science} %% title you are getting with this work like ``Master of ...''
-\newcommand{\mystudy}{Telematik} %% your study like ``Arts''
-\newcommand{\mydegreeprogramme}{Master's degree programme: \mystudy} %% Master's or PhD degree programme
-\newcommand{\myuniversity}{Graz University of Technology} %% your university/school
-\newcommand{\myinstitute}{Institute for Softwaretechnology} %% affiliation
-\newcommand{\myinstitutehead}{Univ.-Prof.\,Dipl-Ing.\,Dr.techn.~Some One} %% head of institute
-\newcommand{\mysupervisor}{Dr.~Some Body} %% your supervisor
+\newcommand{\mystudy}{Wirtschaftsinformatik} %% your study like ``Arts''
+\newcommand{\mydegreeprogramme}{Bachelorstudium: \mystudy} %% Master's or PhD degree programme
+\newcommand{\myuniversity}{Johannes Kepler Universität Linz} %% your university/school
+\newcommand{\myinstitute}{Institut für Wirtschaftsinformatik - Communications Enginieerung} %% affiliation
+\newcommand{\myinstitutehead}{o.Univ.-Prof. Dipl.-Ing. Dr. Christian Stary} %% head of institute
+\newcommand{\mysupervisor}{Assoz. Univ.-Prof. Dipl.-Ing. Dr. Stefan Oppl} %% your supervisor
 \newcommand{\myevaluator}{Prof.~Some Genius} %% your evaluator
-\newcommand{\myhomestreet}{Street~42} %% your home street (with house number)
-\newcommand{\myhometown}{Graz} %% your home town
-\newcommand{\myhomepostalnumber}{8010} %% your postal number of home town
-\newcommand{\mysubmissionmonth}{November} %% month you are handing in
-\newcommand{\mysubmissionyear}{2013} %% year you are handing in
-\newcommand{\mysubmissiontown}{\myhometown} %% town of handing in (or \myhometown)
+\newcommand{\myhomestreet}{Christkindlweg 2} %% your home street (with house number)
+\newcommand{\myhometown}{Steyr} %% your home town
+\newcommand{\myhomepostalnumber}{4400} %% your postal number of home town
+\newcommand{\mysubmissionmonth}{April} %% month you are handing in
+\newcommand{\mysubmissionyear}{2018} %% year you are handing in
+\newcommand{\mysubmissiontown}{Linz} %% town of handing in (or \myhometown)
 
 %% additional information for generic_documentation title page
-\newcommand{\myid}{1234567} %% Matrikelnummer
+\newcommand{\myid}{01455954} %% Matrikelnummer
 \newcommand{\mylecture}{LECTURE} %%
 
 
@@ -231,7 +231,7 @@
 \input{\mytitlepage}            %% include title page
 
 
-\input{template/declaration_TU_Graz}  %% Statutory Declaration
+% \input{template/declaration_TU_Graz}  %% Statutory Declaration
 % \input{thanks}                %% this is a suggestion: you have to create this file on demand
 % \input{foreword}              %% this is a suggestion: you have to create this file on demand
 
