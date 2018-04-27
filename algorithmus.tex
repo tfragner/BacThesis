@@ -1,33 +1,26 @@
 %----------------------------------------------------------------
 %
-%  File    :  thesis-style.tex
+%  File    :  algorithmus.tex
 %
-%  Author  :  Keith Andrews, IICM, TU Graz, Austria
+%  Author  :  Thomas Fragner
 % 
-%  Created :  27 May 93
+%  Created :  2017-10-01
 % 
-%  Changed :  19 Feb 2004
+%  Changed :  2018-04-10
 % 
-% styling and technical implementation adopted 2011 by Karl Voit
 %----------------------------------------------------------------
 
-%% defined an anvironment for the style Keith used to use:
-
-%%%% Time-stamp: <2012-08-20 17:41:39 vk>
-%% example text content
-%% scrartcl and scrreprt starts with section, subsection, subsubsection, ...
-%% scrbook starts with part (optional), chapter, section, ...
 \chapter{Algorithmus} 
 \label{cap:algorithmus}
 In diesem Kapitel wird beschrieben wie der Algorithmus zur Erkennung von sequenziell gelegten Prozessmodellen aufgebaut ist. Der Algorithmus berechnet nur die Zuordnung von Aufgaben zu Subjekten entsprechenden den Vorgaben von CBM. Die Bildinformationen müssen bereits als verarbeitete Daten vorliegen (siehe Kapitel \ref{sec:ausgangsmeterial}). Die Erkenntnisse aus Kapitel \ref{cha:erkennung} dienen als Grundlage für den Algorithmus.
 
-Tabelle \ref{tab:hautpalgorithmus}) zeigt den Hauptalgorithmus. Dieser wird in mehrere Unteralgorithmen aufgeteilt. 
+Tabelle \ref{tab:hautpalgorithmus} zeigt den Hauptalgorithmus. Dieser wird in mehrere Unteralgorithmen aufgeteilt. 
 
 \begin{center}
 	\label{tab:hautpalgorithmus}
 	\begin{tabularx}
 		{1.0\linewidth}{ c X } \textbf{Nr.} & \textbf{Beschreibung} \\
-		\hline 1 & Berechnung des Layouttyps (siehe Kapitel  \ref{sub:unterscheidung_der_legemethoden}) und speichere das Ergebnis in t\\
+		\hline 1 & Bestimme den Layouttyp (siehe Kapitel  \ref{sub:unterscheidung_der_legemethoden}) und speichere das Ergebnis in t\\
 		\hline 2 & Wenn $t < 0.3$ gehe zu Schritt 4 \\
 		\hline 3 & Berechnung der Relationen (siehe Kapitel \ref{sub:relationsauswertung})\\
 		\hline 4 & Ende
@@ -35,13 +28,13 @@ Tabelle \ref{tab:hautpalgorithmus}) zeigt den Hauptalgorithmus. Dieser wird in m
 	\captionof{table}{Hauptalgorithmus} 
 \end{center}
 
-Ergibt sich bei der Berechnung des Layouttyps ein Wert $t<0.3$ wird der Algorithmus abgebrochen, da es sich um ein Sternlayout handelt. Bei einem Wert $t \geq 0.3$ wird die Prozesserkennung durchgeführt.
+Ergibt sich bei der Berechnung des Layouttyps ein Wert $t<0.3$ wird der Algorithmus abgebrochen, da es sich um ein Sternlayout handelt. Bei einem Wert $t \geq 0.3$ wird die Prozesserkennung durchgeführt. \todo{was ist mit Aufgaben die nicht zugewiesen sind}
 
 \section{Unterscheidung des Legelayouts} % (fold)
 \label{sub:unterscheidung_der_legemethoden}
-Im ersten Schritt des Algorithmus muss zwischen Linienlayout und Sternlayout unterschieden werden (siehe Kapitel \ref{ssub:abweichung_von_der_legevorschriften}). Aufgrund der Beschränkungen des Sternlayout (siehe Abb. \ref{fig:sternlegemethode}), kann dieser Typ vom Algorithmus nicht ausgewertet werden. Allerdings muss zur Erkennung von korrekt gelegten Modellen nach dem Linienlayout (siehe Abb. \ref{fig:linienlegemethode}) dennoch zwischen beiden Typen unterschieden werden, damit korrekt gelegte Prozesse automatisch erkannt werden können.
+Im ersten Schritt des Algorithmus muss zwischen Linienlayout und Sternlayout unterschieden werden (siehe Kapitel \ref{ssub:abweichung_von_der_legevorschriften}). Aufgrund der Beschränkungen des Sternlayout (siehe Abb. \ref{fig:sternlegemethode}), kann dieser Typ vom Algorithmus nicht ausgewertet werden. Daher muss zur Erkennung von korrekt gelegten Modellen nach dem Linienlayout (siehe Abb. \ref{fig:linienlegemethode}) dennoch zwischen beiden Typen unterschieden werden.
 
-Um diese beiden Legemethoden voneinander unterscheiden zu können wird als Metrik der euklidische Abstand zwischen Subjekten und Aufgaben verwendet. Bei einem Sternmuster sind die Abstände der Aufgaben zum nächstgelegenen Subjekt ähnlicher als bei Linienmustern. Durch die Verwendung von statistischen Berechnungen ist es möglich diese Unterscheidung zu treffen. Hierzu bietet sich die Verwendung des Variationskoeffizienten (siehe Formel \ref{eq:variation}) an. Dieser gibt an wie groß die normalisierte Streuung einer Liste von Werten ist. Je größer der Wert desto wahrscheinlicher ist das verwendete Legemuster ein Linienmuster. Aufgrund der zu testenden Beispiele hat sich als mögliche Grenze $t=0.3$ (siehe Formel \ref{eq:t}) ergeben. 
+Um diese beiden Legemethoden voneinander unterscheiden zu können wird als Metrik der euklidische Abstand zwischen Subjekten und Aufgaben verwendet. Bei einem Sternmuster sind die Abstände der Aufgaben zum nächstgelegenen Subjekt ähnlicher als bei Linienmustern. Durch die Verwendung von statistischen Berechnungen ist es möglich diese Unterscheidung zu treffen. Hierzu bietet sich die Verwendung des Variationskoeffizienten (siehe Formel \ref{eq:variation}) an. Dieser gibt an wie groß die normalisierte Streuung einer Liste von Werten ist. Je größer der Wert desto wahrscheinlicher ist das verwendete Legemuster ein Linienmuster. Aufgrund der zu testenden Beispiele hat sich als mögliche Grenze $t=0.3$ (siehe Formel \ref{eq:t}) ergeben. \todo{genauer beschreiben was t aussagt und wie man zu 0.3 kommt}
 
 \begin{equation}
 	\label{eq:deviation}
@@ -76,7 +69,7 @@ Tabelle \ref{tab:layouterkennung} zeigt den Algorithmus zur Bestimmung des Layou
 
 \section{Relationsauswertung} % (fold)
 \label{sub:relationsauswertung}
-Der Algorithmus für die Relationsauswertung erfolgt in drei Schritten (siehe Tabelle \ref{tab:relationserkennung-basis}). Im ersten Schritt werden die Aufgaben initial den Subjekten zugeteilt. Im zweiten Schritt werden Subjekten die noch keine zugewiesene Aufgabe besitzen die nächstgelegene Aufgabe zugewiesen. Dieser Schritt basiert auf der Annahme, dass in einem Prozess jedes Subjekt mindestens eine Aufgabe ausführen muss.
+Der Algorithmus für die Relationsauswertung erfolgt in drei Schritten (siehe Tabelle \ref{tab:relationserkennung-basis}). Im ersten Schritt werden die Aufgaben initial den Subjekten zugeteilt. Im zweiten Schritt werden Subjekten, die noch keine zugewiesene Aufgabe besitzen, die jeweils nächstgelegene Aufgabe zugewiesen. Dieser Schritt basiert auf der Annahme, dass in einem Prozess jedes Subjekt mindestens eine Aufgabe ausführen muss.
 
 \begin{center}
 	\label{tab:relationserkennung-basis}
@@ -107,7 +100,7 @@ Im nächsten Schritt wird die initiale Zuordnung der Aufgaben zu Subjekten vorge
 		 1 & Selektiere das Subjekt/Aufgabe - Paar mit dem geringsten Abstand und speichere dieses in closestSubjectTask \\ \midrule 
 		2 & Suche die wahrscheinlichste Folgeaufgabe für closestSubjectTask aus allen Aufgaben die noch keinem Subjekt zugeordnet wurden (siehe Tabelle \ref{tab:find-followup})\\ \midrule 
 		3 & Füge eine Relation für das selektierte Subjekt/Aufgabe - Paar hinzu \\ \midrule 
-		4 & Entferne die Aufgabe aus der Aufgabenliste \\ \midrule 
+		4 & Entferne die Aufgabe aus der Liste möglicher Aufgaben \\ \midrule 
 		5 & Wenn es eine Folgeaufgabe gibt gehe zu Schritt 6 ansonst gehe zu Schritt 8 \\ \midrule 
 		6 & Speichere die Kombination Subjekt/Folgeaufgabe in closestSubjectTask \\ \midrule 
 		7 & Gehe zu Schritt 2 \\ \midrule 
@@ -125,7 +118,7 @@ Ein integraler Bestandteil des Algorithmus ist die Suche nach Folgeaufgaben. Daz
 \begin{description}[align=left]
 	\item [Subjekt] für das die nächste Folgeaufgabe bestimmt werden soll
 	\item [Basisaufgabe] letzte Aufgabe die dem Subjekt zugeordnet wurde
-	\item [mögliche Folgeaufgaben] Liste mit Aufgaben welche für die Bestimmung der Folgeaufgabe berücksichtigt werden sollen.
+	\item [mögliche Folgeaufgaben] welche für die Bestimmung berücksichtigt werden sollen.
 \end{description}
 
 Anhand dieser Eingangsparameter kann mit dem Algorithmus aus Tabelle \ref{tab:find-followup} der Nachfolger bestimmt werden.	
@@ -139,7 +132,7 @@ Anhand dieser Eingangsparameter kann mit dem Algorithmus aus Tabelle \ref{tab:fi
 		\endfoot
  	   	\caption{Folgeaufgabe finden\label{tab:find-followup}}
  	   	\endlastfoot
-		1 & Selektiere einen möglichen Nachfolger und speichere diesen untern posFollowup \\ \midrule
+		1 & Selektiere einen möglichen Nachfolger und speichere diesen unter posFollowup \\ \midrule
 		2 & Prüfe die Kosinusähnlichkeit (siehe Kapitel \ref{sub:kosinusahnlichkeit_berechnen}) zwischen Subjekt/Basisaufgabe und Subjekt/posFollowUp\\
 		2.1 & Wenn die Prüfung erfolgreich war gehe zu Schritt 3 \\
 		2.2 & Gehe zu Schritt 6 \\ \midrule
@@ -150,7 +143,7 @@ Anhand dieser Eingangsparameter kann mit dem Algorithmus aus Tabelle \ref{tab:fi
 		4.1 & Wenn die Prüfung erfolgreich war gehe zu Schritt 5 \\
 		4.2 & Gehe zu Schritt 6 \\ \midrule
 		5 & Prüfe auf Überschneidung des Vektors Subjekt/Folgeaufgabe mit anderen Subjekten \\
-		5.1 & Wenn die Prüfung erfolgreich war gehe zu Schritt 5.2 ansonst gehe zu Schritt bla \\
+		5.1 & Wenn die Prüfung erfolgreich war gehe zu Schritt 5.2 ansonst gehe zu Schritt 6 \\
 		5.2 & Speichere das Paar Folgeaufgabe mit dem dem Wert der Distanz zwischen Subjekt und Folgeaufgabe in die Liste validFollowUps \\ \midrule
 		6 & Selektiere den nächsten möglichen Nachfolger und speichere diesen unter posFollowUp \\
 		6.1 & wenn posFollowUp existiert gehe zu Schritt 2 \\ \midrule
@@ -170,7 +163,7 @@ Anhand dieser Eingangsparameter kann mit dem Algorithmus aus Tabelle \ref{tab:fi
 
 \subsection{Subjekte prüfen} % (fold)
 \label{sub:subjekte_prufen}
-Im nächsten Schritt des Algorithmus werden Subjekte behandelt denen noch keine Aufgaben zugeordnet sind. Dabei wird den Subjekten die nächstgelegene Aufgabe zugeordnet. Da diese Aufgabe bereits an ein Subjekt gebunden ist muss die entsprechende Relation gelöscht werden und eine neue Relation erstellt werden.
+Im nächsten Schritt des Algorithmus werden Subjekte behandelt denen noch keine Aufgabe zugeordnet wurde. Dabei wird den Subjekten die nächstgelegene Aufgabe zugeordnet. Da diese Aufgabe bereits an ein Subjekt gebunden ist muss die entsprechende Relation gelöscht werden, und eine neue Relation erstellt werden.
 % subsection subjekte_prufen (end)
 
 \subsection{Zuweisungen verifizieren} % (fold)
@@ -203,7 +196,7 @@ Im abschließenden Schritt werden die vorhandenen Zuordnungen auf Plausibilität
 
 \subsection{Kosinusähnlichkeit berechnen} % (fold)
 \label{sub:kosinusahnlichkeit_berechnen}
-Zur Verifizierung der Richtung zweier Vektoren wird die Kosinusähnlichkeit verwendet. Linearität liegt vor wenn sich die Kosinusähnlichkeit dieser Vektoren in bestimmten Grenzen bewegt. Zur Feststellung der Grenzen werden die Abmessungen der Karten unter Berücksichtigung der Distanz der Basisaufgabe zum Subjekt genutzt. \todo{Bild zur Veranschaulichung} Abbildung ...
+Zur Verifizierung der Richtung zweier Vektoren wird die Kosinusähnlichkeit verwendet. Linearität liegt vor wenn sich die Kosinusähnlichkeit dieser Vektoren in bestimmten Grenzen bewegt. \todo{erklären der Grenzen} Zur Feststellung der Grenzen werden die Abmessungen der Karten unter Berücksichtigung der Distanz der Basisaufgabe zum Subjekt genutzt. \todo{Bild zur Veranschaulichung} Abbildung ...
 
 {\setstretch{1.0}
 \begin{center}
@@ -227,6 +220,8 @@ Zur Verifizierung der Richtung zweier Vektoren wird die Kosinusähnlichkeit verw
 	\label{eq:maxcosinussimilarity}
 	cs_{max} = \cos{\arcsin{\frac{b}{d}}}
 \end{equation}
+
+\todo{anders anordnen}
 % subsection kosinusahnlichkeit_berechnen (end)
 % subsection zuweisungen_verifizieren (end)
 

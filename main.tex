@@ -34,6 +34,7 @@
 %% How to separate paragraphs: indention ("no") or spacing ("half",
 %% "full", ...).
 
+% Ändern auf 10mm
 \newcommand{\myBCOR}{10mm}
 %% Inner binding correction. This value depends on the method which is
 %% being used to bind your printed result. Some techniques do not
@@ -104,6 +105,7 @@
 %%             see https://github.com/novoid/LaTeX-KOMA-template/issues/5
 %% "template/title_VWA": titlepage for Vorwissenschaftliche Arbeit
 
+% \newcommand{\mytodonotesoptions}{textwidth=40mm}
 \newcommand{\mytodonotesoptions}{}
 %% e.g., "" (empty), "disable", ...
 %% Options for the todonotes-package. If "disable", all todonotes will
@@ -118,7 +120,7 @@
 %% Please do not set to "false" without a good reason. The colophon
 %% helps your readers to get in touch with LaTeX and to find this template.
 
-\setboolean{myaddlistoftodos}{false}  %% "true" or "false"
+\setboolean{myaddlistoftodos}{true}  %% "true" or "false"
 %% If set to "true": the current list of open todos is added after the
 %% table of contents. If \mytodonotesoptions is set to "disable", no
 %% list of todos is added, independent of this setting here.
@@ -137,7 +139,7 @@
 \newcommand{\myauthorwithexistingtitles}{\myauthor{}}  %% including
                                 %% university degree already held
                                 %% (BSc, MSc, ...)
-\newcommand{\mytitle}{Erkennung sequenzieller Prozessabfolgen}  %% also used for PDF metadata (hyperref)
+\newcommand{\mytitle}{Erkennung sequenzieller Aufgabenabfolgen in gelegten Prozessmodellen}  %% also used for PDF metadata (hyperref)
 \newcommand{\mysubject}{SUBJECT}  %% also used for PDF metadata (hyperref)
 \newcommand{\mykeywords}{KEYWORDS}  %% also used for PDF metadata (hyperref)
 
@@ -194,7 +196,7 @@
 
 \newcommand{\myLaT}{\LaTeX{}@TUG\xspace} %% LaTeX@TUG text "logo"
 
-\hyphenation{ex-am-ple hy-phen-ate}  %% in order to use German umlauts
+\hyphenation{ex-am-ple hy-phen-ate Le-ge-ri-cht-ung fu-nk-tion-iert Ver-bind-ung-en}  %% in order to use German umlauts
 %% here (Ver-\"of-fent-li-chung), you have to check for
 %% activated \usepackage[T1]{fontenc} in the preamble
 

@@ -1,40 +1,37 @@
 %----------------------------------------------------------------
 %
-%  File    :  thesis-style.tex
+%  File    :  empfehlungen.tex
 %
-%  Author  :  Keith Andrews, IICM, TU Graz, Austria
+%  Author  :  Thomas Fragner
 % 
-%  Created :  27 May 93
+%  Created :  2017-10-01
 % 
-%  Changed :  19 Feb 2004
+%  Changed :  2018-04-10
 % 
-% styling and technical implementation adopted 2011 by Karl Voit
 %----------------------------------------------------------------
 
-%% defined an anvironment for the style Keith used to use:
+\chapter{Verständlichkeit von CBM-Modellen}
+\label{cha:Empfehlungen}
+In diesem Kapitel wird die erste Forschungsaufgabe behandelt. Die Methode CBM \citep{Oppl:2015:ASB:2723839.2723841} wird auf die einfache Verständlichkeit der Notation unter Berücksichtigung der zugrundeliegenden Modellierungsvorschriften überprüft.
 
-\chapter{Verständlichkeit von Card Based Modeling}
-\label{chap:Empfehlungen}
-In diesem Kapitel wird die erste Forschungsaufgabe behandelt. Die Methode CBM \citep{Oppl:2015:ASB:2723839.2723841} wird auf die einfache Verständlichkeit der Notation und den zugrundeliegenden Modellierungsvorschriften überprüft.
-
-\citeauthor{MENDLING2010127} definiert die folgenden Kriterien die zur einfachen Verständlichkeit von Prozessmodellen erfüllt werden sollten:
+\citeauthor{MENDLING2010127} definieren die folgenden Kriterien, welche zur einfachen Verständlichkeit von Prozessmodellen erfüllt werden sollten:
 \begin{enumerate}
 	\item G1 Verwendung soweniger Elemente wie möglich.
 	\item G2 Geringe Anzahl der ein- und ausgehenden Verbindungen pro Element.
 	\item G3 Ein Anfangs- und Endelement.
-	\item G4 Strukturiertheit des Modell.
+	\item G4 Strukturiertheit des Modells.
 	\item G5 Vermeidung von ODER Verzweigungen.
 	\item G6 Verwendung von Verb/Objekt Beschreibungen.
 	\item G7 Dekomposition bei mehr als 50 Elementen.\citep{MENDLING2010127}
 \end{enumerate}
 
-Im Folgenden wird für die einzelnen Punkte beschrieben inwiefern diese beim Card Based Modeling erfüllt werden:
+Folegend wird für die einzelnen Punkte beschrieben inwiefern diese beim Card Based Modeling zutreffend sind bzw. erfüllt werden:
 
 \begin{enumerate}
-	\item wird erfüllt, da bei CBM meist auf einer höheren Abstraktionsebene modelliert wird, und die Möglichkeiten von Verzweigungen nicht vorgesehen sind. Daraus folgt, dass die potenzielle Anzahl von Elementen in einem CBM Modell eher niedrig ist. Weiter wird die Anzahl meist durch die beschränkten Platzverhältnisse beim Modellieren beeinflußt. 
+	\item wird erfüllt, da bei CBM meist auf einer höheren Abstraktionsebene modelliert wird, und die Möglichkeiten von Verzweigungen nicht vorgesehen sind. Daraus folgt, dass die potenzielle Anzahl von Elementen in einem CBM Modell niedrig ist. Weiter wird die Anzahl meist durch die beschränkten Platzverhältnisse beim Modellieren beeinflusst. 
 	\item wird erfüllt, da es sich um ein sequenzielles Modell handelt und damit verbunden gibt es im Normalfall nur einen Ein- bzw. Ausgang pro Aufgabe.
-	\item wir erfüllt, da aufgrund der sequenziellen Natur der Modellierungssprache meist nur ein Start- bzw. Endelement existiert.
-	\item wird erfüllt, da es keine Notationselemente zum splitten (Gateways) des Prozesspfades gibt. 
+	\item wird erfüllt, da aufgrund der sequenziellen Natur der Modellierungssprache meist nur ein Start- bzw. Endelement existiert.
+	\item wird erfüllt, da es keine Notationselemente zum Verzweigen (Gateways) des Prozesspfades gibt. 
 	\item wird erfüllt, da es kein entsprechendes Notationselement gibt. 
 	\item kann erfüllt werden, da es sich hierbei um eine formale Richtlinie handelt.
 	\item Die siebte Regel ist unabhängig von der verwendeten Notation und kann in jedem Fall erfüllt werden.

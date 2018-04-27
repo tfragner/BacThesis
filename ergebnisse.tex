@@ -15,9 +15,9 @@
 
 \chapter{Tests und Ergebnisse}
 \label{chap:Ergebnisse}
-Im vorangegangen Kapitel \ref{cap:algorithmus} wurde der Algorithmus für die Zuordnung von Aufgaben zu Subjekten beschrieben. Dieses Kapitel zeigt die Ergebnisse des Algorithmus basierend auf den Testfällen \cite{max}. Für den Test wurde der Algorithmus prototypisch in JAVA implementiert. Der Source Code ist in Github unter https://github.com/tfragner/interpreter-algorithm verfügbar.
+Im vorangegangen Kapitel wurde der Algorithmus für die Zuordnung von Aufgaben zu Subjekten beschrieben. Dieses Kapitel zeigt die Ergebnisse des Algorithmus basierend auf den Testfällen \cite{max}. Für den Test wurde der Algorithmus prototypisch in JAVA implementiert. Der Source Code als in Github-Repository unter https://github.com/tfragner/interpreter-algorithm verfügbar.
 
-Anhand der Testfälle werden die Kriterien aus Kapitel \ref{cha:erkennung} sowie die Implementierung des Algorithmus aus Kapitel \ref{cap:algorithmus} geprüft. Die Folgenden Testfälle werden durch die Testfälle abgebildet: 
+Anhand der Testfälle werden die Kriterien aus Kapitel \ref{cha:erkennung} sowie die Implementierung des Algorithmus aus Kapitel \ref{cap:algorithmus} geprüft. Die folgenden Testfälle werden durch die Beispiele abgebildet: 
 \begin{description}
 	\item[Layout] Die Unterscheidung von Stern- und Linienlayout
 	\item[Subjektanordnungen] die nicht den Legevorschriften nach CBM entsprechen
@@ -40,9 +40,9 @@ Die Testergebnisse sind in Tabelle \ref{tab:results} aufgelistet. Die Spalte \te
  	   	\endlastfoot
 		1 & \includegraphics[width=\linewidth]{figures/01.jpg} & Ja & Dieses Beispiel entspricht den Kriterien der Legetechnik. \\
 		\midrule
-		2 & \includegraphics[width=\linewidth]{figures/02.jpg} & Ja & In diesem Beispiel ist ersichtlich, dass die Karten nicht exakt vertikal angeordnet sein müssen und die Rotation der Karten keinen Einfluss auf das Ergebnis hat. \\
+		2 & \includegraphics[width=\linewidth]{figures/02.jpg} & Ja & In diesem Beispiel ist ersichtlich, dass die Karten nicht exakt vertikal angeordnet sein müssen, und die Rotation der Karten keinen Einfluss auf das Ergebnis hat. \\
 		\midrule
-		3 & \includegraphics[width=\linewidth]{figures/03.jpg} & Ja & Die Zuordnungen werden richtig erkannt obwohl die Anordnung der Subjekt nicht den Legevorschriften entspricht. \\
+		3 & \includegraphics[width=\linewidth]{figures/03.jpg} & Ja & Die Zuordnungen werden richtig erkannt obwohl die Anordnung der Subjekte nicht den Legevorschriften entspricht. \\
 		\midrule
 		4 & \includegraphics[width=\linewidth]{figures/04.jpg} & Ja & Dieses Beispiel ist dem Anschein nach als Sternlayout gelegt. Dennoch wird das Muster erkannt, da die Aufgaben jedes Subjekts in Linie gelegt sind. \\
 		\midrule
@@ -54,11 +54,11 @@ Die Testergebnisse sind in Tabelle \ref{tab:results} aufgelistet. Die Spalte \te
 		\midrule
 		8 & \includegraphics[width=\linewidth]{figures/08.jpg} & Ja & In diesem Beispiel wird die Aufgabe im linken unteren Eck korrekt zugeordnet, da der Vektor vom oberen linken Subjekt zur Aufgabe ein Subjekt schneidet.  \\
 		\midrule
-		9 & \includegraphics[width=\linewidth]{figures/09.jpg} & Ja & Entspricht in Bezug auf den Algorithmus dem Testfall 8. \\
+		9 & \includegraphics[width=\linewidth]{figures/09.jpg} & Ja & Entspricht in Bezug auf den Algorithmus Testfall 8. \\
 		\midrule
 		10 & \includegraphics[width=\linewidth]{figures/10.jpg} & Ja & Dieses Beispiel ist scheinbar ein Sternlayout, wird aber korrekt als Linienlayout erkannt. In diesem Fall wird besonders die Funktionalität der Verifizierung geprüft. \\
 		\midrule
-		11 & \includegraphics[width=\linewidth]{figures/11.jpg} & Ja & Entspricht in Bezug auf den Algorithmus dem Testfall 10.  \\
+		11 & \includegraphics[width=\linewidth]{figures/11.jpg} & Ja & Entspricht in Bezug auf den Algorithmus Testfall 10.  \\
 		\midrule
 		12 & \includegraphics[width=\linewidth]{figures/12.jpg} & Ja & Der Testfall wird als Sternmuster erkannt. \\
 		\midrule
@@ -70,11 +70,13 @@ Die Testergebnisse sind in Tabelle \ref{tab:results} aufgelistet. Die Spalte \te
 		\midrule
 		16 & \includegraphics[width=\linewidth]{figures/16.jpg} & Ja & Dieses Beispiel zeigt, dass trotz unterschiedlicher Richtungen die Zuordnungen richtig erkannt werden \\
 		\midrule
-		17 & \includegraphics[width=\linewidth]{figures/17.jpg} & Ja & Entspricht in Bezug auf den Algorithmus dem Testfall 16. \\
+		17 & \includegraphics[width=\linewidth]{figures/17.jpg} & Ja & Entspricht in Bezug auf den Algorithmus Testfall 16. \\
 		\midrule
 	\end{longtabu}
 \end{center}
 }
+
+\todo {ad. 7 Aufgabe oder Subjekt?}
 
 Die Ergebnisse zeigen, dass der Algorithmus für alle Testfälle fehlerfrei funktioniert.
 
