@@ -28,7 +28,7 @@ Tabelle \ref{tab:hautpalgorithmus} zeigt den Hauptalgorithmus. Dieser wird in me
 	\captionof{table}{Hauptalgorithmus} 
 \end{center}
 
-Ergibt sich bei der Berechnung des Layouttyps ein Wert $t<0.3$ wird der Algorithmus abgebrochen, da es sich um ein Sternlayout handelt. Bei einem Wert $t \geq 0.3$ wird die Prozesserkennung durchgeführt. \todo{was ist mit Aufgaben die nicht zugewiesen sind}
+Ergibt sich bei der Berechnung des Layouttyps ein Wert $t<0.3$ wird der Algorithmus abgebrochen, da es sich um ein Sternlayout handelt. Bei einem Wert $t \geq 0.3$ wird die Prozesserkennung durchgeführt.
 
 \section{Unterscheidung des Legelayouts} % (fold)
 \label{sub:unterscheidung_der_legemethoden}
@@ -151,7 +151,6 @@ Anhand dieser Eingangsparameter kann mit dem Algorithmus aus Tabelle \ref{tab:fi
 	\end{longtabu}
 \end{center}
 }
-\todo{Anderer Grenzwert!}
 	
 % subsubsection folgeaufgabe_suchen (end)
 
@@ -192,15 +191,17 @@ Im abschließenden Schritt werden die vorhandenen Zuordnungen auf Plausibilität
 \end{center}
 }
 
-\todo{TBD}
-
 \subsection{Kosinusähnlichkeit berechnen} % (fold)
 \label{sub:kosinusahnlichkeit_berechnen}
-Zur Verifizierung der Richtung zweier Vektoren wird die Kosinusähnlichkeit verwendet. Linearität liegt vor, wenn sich die Kosinusähnlichkeit dieser Vektoren in bestimmten Grenzen bewegt. Zur Feststellung der Grenzen werden die Abmessungen der Karten unter Berücksichtigung der Distanz der Basisaufgabe zum Subjekt genutzt.
+Zur Verifizierung der Richtung zweier Vektoren wird die Kosinusähnlichkeit verwendet. Linearität liegt vor, wenn sich die Kosinusähnlichkeit dieser Vektoren in bestimmten Grenzen bewegt. Zur Feststellung der Grenzen werden die Abmessungen der Karten unter Berücksichtigung der Distanz der Basisaufgabe zum Subjekt genutzt. Damit wird sichergestellt, dass das Bildausgangsmaterial keinen Einfluss auf das Ergebnis hat.
+
+Abbildung \ref{fig:cosine_sim} zeigt den validen Bereich in dem sich die Mittelpunkte möglicher Folgeaufgaben befinden muss. Der valide Bereich ist durch zwei Vektoren, die symmetrisch unter dem Winkel $\arccos\left({cs_{max}}\right)$ zur Verbindungen der Mittelpunkte des Subjekts und der Basisaufgabe stehen, definiert.
+ 
+\myfigh{cosine_similarity.png}{Kosinusähnlichkeit}{fig:cosine_sim}
 
 \begin{equation}
 	\label{eq:maxcosinussimilarity}
-	cs_{max} = \cos{\arcsin{\frac{b}{d}}}
+	cs_{max} = \cos{\arcsin{\frac{\frac{b}{2}}{d}}}
 \end{equation}
 
 {\setstretch{1.0}
@@ -212,11 +213,11 @@ Zur Verifizierung der Richtung zweier Vektoren wird die Kosinusähnlichkeit verw
 		\endfoot
  	   	\caption{Kosinusähnlichkeit prüfen\label{tab:check-cosplausibility}}
  	   	\endlastfoot
-		1 & Bestimmen der größten Kartenabmessung der Ausgangsaufgabe und Speicherung des Werts als b \\ \midrule
-		2 & Bestimmen des Abstands zwischen Subjekt und Ausgangsaufgabe und Speicherung des Werts als d \\ \midrule
-		3 & Berechnung der maximalen Kosinusabweichung (siehe Formel \ref{eq:maxcosinussimilarity}) und Speicherung des Werts als csmax\\ \midrule
-		4 & Berechnung der Kosinusähnlichkeit für die Vektoren Subjekt/Basisaufgabe und Subjekt/Folgeaufgabe und Speicherung des Werts als cs\\ \midrule
-		5 & Rückgabe boolscher Wert für $csmax < cs$  
+		1 & Bestimme die größte Kartenabmessung der Ausgangsaufgabe und speichere den Werts als $b$ \\ \midrule
+		2 & Bestimme den Abstand zwischen Subjekt und Ausgangsaufgabe und speichere den Werts als $d$ \\ \midrule
+		3 & Berechne die maximale Kosinusabweichung (siehe Formel \ref{eq:maxcosinussimilarity}) und speichere des Werts als $cs_{max}$\\ \midrule
+		4 & Berechne die Kosinusähnlichkeit für die Vektoren Subjekt/Basisaufgabe und Subjekt/Folgeaufgabe und speichere des Werts als $cs$\\ \midrule
+		5 & Rückgabe des boolschen Werts für $cs_{max} < cs$  
 	\end{longtabu}
 \end{center}
 }
