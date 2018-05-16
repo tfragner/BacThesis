@@ -12,7 +12,7 @@
 
 \chapter{Algorithmus} 
 \label{cap:algorithmus}
-In diesem Kapitel wird beschrieben wie der Algorithmus zur Erkennung von sequenziell gelegten Prozessmodellen aufgebaut ist. Der Algorithmus berechnet nur die Zuordnung von Aufgaben zu Subjekten entsprechenden den Vorgaben von CBM. Die Bildinformationen müssen bereits als verarbeitete Daten vorliegen (siehe Kapitel \ref{sec:ausgangsmeterial}). Die Erkenntnisse aus Kapitel \ref{cha:erkennung} dienen als Grundlage für den Algorithmus.
+In diesem Kapitel wird beschrieben wie der Algorithmus zur Erkennung von sequenziell gelegten Prozessmodellen aufgebaut ist. Der Algorithmus berechnet nur die Zuordnung von Aufgaben zu Subjekten entsprechend den Vorgaben von CBM. Die Bildinformationen müssen bereits als verarbeitete Daten vorliegen (siehe Kapitel \ref{sec:ausgangsmeterial}). Die Erkenntnisse aus Kapitel \ref{cha:erkennung} dienen als Grundlage für den Algorithmus.
 
 Tabelle \ref{tab:hautpalgorithmus} zeigt den Hauptalgorithmus. Dieser wird in mehrere Unteralgorithmen aufgeteilt. 
 
@@ -32,9 +32,9 @@ Ergibt sich bei der Berechnung des Layouttyps ein Wert $t<0.3$ wird der Algorith
 
 \section{Unterscheidung des Legelayouts} % (fold)
 \label{sub:unterscheidung_der_legemethoden}
-Im ersten Schritt des Algorithmus muss zwischen Linienlayout und Sternlayout unterschieden werden (siehe Kapitel \ref{ssub:abweichung_von_der_legevorschriften}). Aufgrund der Beschränkungen des Sternlayout (siehe Abb. \ref{fig:sternlegemethode}), kann dieser Typ vom Algorithmus nicht ausgewertet werden. Daher muss zur Erkennung von korrekt gelegten Modellen nach dem Linienlayout (siehe Abb. \ref{fig:linienlegemethode}) dennoch zwischen beiden Typen unterschieden werden.
+Im ersten Schritt des Algorithmus muss zwischen Linienlayout und Sternlayout unterschieden werden (siehe Kapitel \ref{ssub:abweichung_von_der_legevorschriften}). Aufgrund der Beschränkungen des Sternlayouts (siehe Abb. \ref{fig:sternlegemethode}), kann dieser Typ vom Algorithmus nicht ausgewertet werden. Daher muss zur Erkennung von korrekt gelegten Modellen nach dem Linienlayout (siehe Abb. \ref{fig:linienlegemethode}) dennoch zwischen beiden Typen unterschieden werden.
 
-Um diese beiden Legemethoden voneinander unterscheiden zu können wird als Metrik der euklidische Abstand zwischen Subjekten und Aufgaben verwendet. Bei einem Sternmuster sind die Abstände der Aufgaben zum nächstgelegenen Subjekt ähnlicher als bei Linienmustern. Durch die Verwendung von statistischen Berechnungen ist es möglich diese Unterscheidung zu treffen. Hierzu bietet sich die Verwendung des Variationskoeffizienten (siehe Formel \ref{eq:variation}) an. Dieser gibt an wie groß die normalisierte Streuung einer Liste von Werten ist. Je größer der Wert desto wahrscheinlicher ist das verwendete Legemuster ein Linienmuster. Aufgrund der zu testenden Beispiele hat sich als mögliche Grenze $t=0.3$ (siehe Formel \ref{eq:t}) ergeben. \todo{genauer beschreiben was t aussagt und wie man zu 0.3 kommt}
+Um diese beiden Legemethoden voneinander unterscheiden zu können, wird als Metrik der euklidische Abstand zwischen Subjekten und Aufgaben verwendet. Bei einem Sternmuster sind die Abstände der Aufgaben zum nächstgelegenen Subjekt ähnlicher als bei Linienmustern. Durch die Verwendung von statistischen Berechnungen ist es möglich diese Unterscheidung zu treffen. Hierzu bietet sich die Verwendung des Variationskoeffizienten (siehe Formel \ref{eq:variation}) an. Dieser gibt an wie groß die normalisierte Streuung einer Liste von Werten ist. Je größer der Wert desto wahrscheinlicher ist das verwendete Legemuster ein Linienmuster. Formel \ref{eq:t} berechnet den Durchschnitt der Variationskoeffizienten aller Subjekte denen mehr als eine Aufgabe zugewiesen wurden. Aufgrund der zu testenden Beispiele hat sich als mögliche Grenze $t=0.3$ ergeben.
 
 \begin{equation}
 	\label{eq:deviation}
@@ -57,9 +57,9 @@ Tabelle \ref{tab:layouterkennung} zeigt den Algorithmus zur Bestimmung des Layou
 		\hline 1 & Ermittle für jede Aufgabe den Abstand zum nächstgelegenen Subjekt \\
 		\hline 2 & Ordne jede Aufgabe dem nächstgelegenen Subjekt zu \\
 		\hline 3 & Wähle das erste Subjekt aus \\
-		\hline 4 & Wenn dem Subjekt nur eine Aufgabe zugeordnet ist gehe zu Schritt 6 \\
+		\hline 4 & Wenn dem Subjekt nur eine Aufgabe zugeordnet ist, gehe zu Schritt 6 \\
 		\hline 5 & Berechne den Variationskoeffizienten (siehe Formel  \ref{eq:variation}) für die Abstände zwischen dem Subjekt und den zugeordneten Aufgaben \\
-		\hline 6 & Wenn noch nicht verarbeitete Subjekte vorhanden sind wähle das nächste Subjekt und gehe zu Schritt 4 \\
+		\hline 6 & Wenn noch nicht verarbeitete Subjekte vorhanden sind, wähle das nächste Subjekt und gehe zu Schritt 4 \\
 		\hline 7 & Bilde das Mittel der Variationskoeffizienten aller Subjekte mit mehr als einer zugeordneten Aufgabe (siehe Formel \ref{eq:t})\\
 		\hline 8 & Gib den gemittelten Wert zurück.
 	\end{tabularx}
@@ -69,7 +69,7 @@ Tabelle \ref{tab:layouterkennung} zeigt den Algorithmus zur Bestimmung des Layou
 
 \section{Relationsauswertung} % (fold)
 \label{sub:relationsauswertung}
-Der Algorithmus für die Relationsauswertung erfolgt in drei Schritten (siehe Tabelle \ref{tab:relationserkennung-basis}). Im ersten Schritt werden die Aufgaben initial den Subjekten zugeteilt. Im zweiten Schritt werden Subjekten, die noch keine zugewiesene Aufgabe besitzen, die jeweils nächstgelegene Aufgabe zugewiesen. Dieser Schritt basiert auf der Annahme, dass in einem Prozess jedes Subjekt mindestens eine Aufgabe ausführen muss.
+Der Algorithmus für die Relationsauswertung erfolgt in drei Schritten (siehe Tabelle \ref{tab:relationserkennung-basis}). Im ersten Schritt werden die Aufgaben initial den Subjekten zugeteilt. Im zweiten Schritt wird Subjekten, die noch keine zugewiesene Aufgabe besitzen, die jeweils nächstgelegene Aufgabe zugewiesen. Dieser Schritt basiert auf der Annahme, dass in einem Prozess jedes Subjekt mindestens eine Aufgabe ausführen muss.
 
 \begin{center}
 	\label{tab:relationserkennung-basis}
@@ -97,27 +97,27 @@ Im nächsten Schritt wird die initiale Zuordnung der Aufgaben zu Subjekten vorge
 		\endfoot
  	   	\caption{Initiale Zuweisung\label{tab:initial-assignment}}
  	   	\endlastfoot
-		 1 & Selektiere das Subjekt/Aufgabe - Paar mit dem geringsten Abstand und speichere dieses in closestSubjectTask \\ \midrule 
-		2 & Suche die wahrscheinlichste Folgeaufgabe für closestSubjectTask aus allen Aufgaben die noch keinem Subjekt zugeordnet wurden (siehe Tabelle \ref{tab:find-followup})\\ \midrule 
+		 1 & Wähle das Subjekt/Aufgabe - Paar mit dem geringsten Abstand und speichere dieses in closestSubjectTask \\ \midrule 
+		2 & Suche die wahrscheinlichste Folgeaufgabe für closestSubjectTask aus allen Aufgaben, die noch keinem Subjekt zugeordnet wurden (siehe Tabelle \ref{tab:find-followup})\\ \midrule 
 		3 & Füge eine Relation für das selektierte Subjekt/Aufgabe - Paar hinzu \\ \midrule 
 		4 & Entferne die Aufgabe aus der Liste möglicher Aufgaben \\ \midrule 
-		5 & Wenn es eine Folgeaufgabe gibt gehe zu Schritt 6 ansonst gehe zu Schritt 8 \\ \midrule 
+		5 & Wenn es eine Folgeaufgabe gibt, gehe zu Schritt 6, ansonsten gehe zu Schritt 8 \\ \midrule 
 		6 & Speichere die Kombination Subjekt/Folgeaufgabe in closestSubjectTask \\ \midrule 
 		7 & Gehe zu Schritt 2 \\ \midrule 
 		8 & Entferne das Subjekt aus der Subjektliste \\ \midrule 
-		9 & Wenn es noch Subjekte und Aufgaben ohne Zuordnung gibt gehe zu Schritt 1
+		9 & Wenn es noch Subjekte und Aufgaben ohne Zuordnung gibt, gehe zu Schritt 1
 	\end{longtabu}
 \end{center}
 
-Im ersten Schritt wird die Subjekt/Aufgabe Kombination mit dem geringsten Abstand gesucht. Diese Kombination ist der wahrscheinlichste Beginn des Prozesses und es handelt sich um die sicherste Erstzuordnung. Ausgehend von diesem Paar werden mögliche Folgeaufgaben identifiziert. Für die Bestimmung der Folgeaufgaben werden nur Aufgaben berücksichtigt, die noch keinem Subjekt zugeordnet wurden. Der Algorithmus wird solange ausgeführt bis alle Aufgaben Subjekten zugeordnet sind.
+Im ersten Schritt wird die Subjekt/Aufgabe Kombination mit dem geringsten Abstand gesucht. Diese Kombination ist der wahrscheinlichste Beginn des Prozesses, und es handelt sich um die sicherste Erstzuordnung. Ausgehend von diesem Paar werden mögliche Folgeaufgaben identifiziert. Für die Bestimmung der Folgeaufgaben werden nur Aufgaben berücksichtigt, die noch keinem Subjekt zugeordnet wurden. Der Algorithmus wird solange ausgeführt bis alle Aufgaben Subjekten zugeordnet sind.
 
 \subsubsection{Folgeaufgabe suchen} % (fold)
 \label{ssub:folgeaufgabe_suchen}
-Ein integraler Bestandteil des Algorithmus ist die Suche nach Folgeaufgaben. Dazu wird unter Berücksichtigung des aktuellen Subjekts und der aktuell letzten zugeordneten Aufgabe des Subjekts nach Folgeaufgaben gesucht. Aus allen möglichen Folgeaufgaben wird die wahrscheinlichste Aufgabe anhand von Filterkriterien ermittelt. Der Algorithmus benötig zur Feststellung des Nachfolgers folgende Eingangsparameter:
+Ein integraler Bestandteil des Algorithmus ist die Suche nach Folgeaufgaben. Dazu wird unter Berücksichtigung des aktuellen Subjekts und der aktuell letzten zugeordneten Aufgabe des Subjekts nach Folgeaufgaben gesucht. Aus allen möglichen Folgeaufgaben wird die wahrscheinlichste Aufgabe anhand von Filterkriterien ermittelt. Der Algorithmus benötigt zur Feststellung des Nachfolgers folgende Eingangsparameter:
 
 \begin{description}[align=left]
 	\item [Subjekt] für das die nächste Folgeaufgabe bestimmt werden soll
-	\item [Basisaufgabe] letzte Aufgabe die dem Subjekt zugeordnet wurde
+	\item [Basisaufgabe] letzte Aufgabe, die dem Subjekt zugeordnet wurde
 	\item [mögliche Folgeaufgaben] welche für die Bestimmung berücksichtigt werden sollen.
 \end{description}
 
@@ -139,15 +139,15 @@ Anhand dieser Eingangsparameter kann mit dem Algorithmus aus Tabelle \ref{tab:fi
 		3 & Vergleiche die Distanz von Subjekt/Basisaufgabe und Subjekt/Folgeaufgabe \\
 		3.1 & Wenn die Folgeaufgabe weiter vom Subjekt entfernt ist als die Basisaufgabe gehe zu Schritt 4 \\
 		3.2 & Gehe zu Schritt 6 \\ \midrule
-		4 & Prüfe die Kosinusähnlichkeit (siehe Kapitel \ref{sub:kosinusahnlichkeit_berechnen}) der Vektoren Subjekt/Basisaufgabe zu Basisaufgabe/Folgeaufgabe \\
-		4.1 & Wenn die Prüfung erfolgreich war gehe zu Schritt 5 \\
-		4.2 & Gehe zu Schritt 6 \\ \midrule
-		5 & Prüfe auf Überschneidung des Vektors Subjekt/Folgeaufgabe mit anderen Subjekten \\
-		5.1 & Wenn die Prüfung erfolgreich war gehe zu Schritt 5.2 ansonst gehe zu Schritt 6 \\
-		5.2 & Speichere das Paar Folgeaufgabe mit dem dem Wert der Distanz zwischen Subjekt und Folgeaufgabe in die Liste validFollowUps \\ \midrule
-		6 & Selektiere den nächsten möglichen Nachfolger und speichere diesen unter posFollowUp \\
-		6.1 & wenn posFollowUp existiert gehe zu Schritt 2 \\ \midrule
-		7 & Wenn die Liste validFollowUps nicht leer ist wähle die Aufgabe mit der kleinsten Distanz und gibt diese zurück
+		%4 & Prüfe die Kosinusähnlichkeit (siehe Kapitel \ref{sub:kosinusahnlichkeit_berechnen}) der Vektoren Subjekt/Basisaufgabe zu Basisaufgabe/Folgeaufgabe \\
+		%4.1 & Wenn die Prüfung erfolgreich war, gehe zu Schritt 5 \\
+		%4.2 & Gehe zu Schritt 6 \\ \midrule
+		4 & Prüfe auf Überschneidung des Vektors Subjekt/Folgeaufgabe mit anderen Subjekten \\
+		4.1 & Wenn die Prüfung erfolgreich war, gehe zu Schritt 4.2, ansonsten gehe zu Schritt 5 \\
+		4.2 & Speichere das Paar Folgeaufgabe mit dem Wert der Distanz zwischen Subjekt und Folgeaufgabe in die Liste validFollowUps \\ \midrule
+		5 & Selektiere den nächsten möglichen Nachfolger und speichere diesen unter posFollowUp \\
+		5.1 & wenn posFollowUp existiert gehe zu Schritt 2 \\ \midrule
+		6 & Wenn die Liste validFollowUps nicht leer ist, wähle die Aufgabe mit der kleinsten Distanz und gibt diese zurück
 	\end{longtabu}
 \end{center}
 }
@@ -163,12 +163,12 @@ Anhand dieser Eingangsparameter kann mit dem Algorithmus aus Tabelle \ref{tab:fi
 
 \subsection{Subjekte prüfen} % (fold)
 \label{sub:subjekte_prufen}
-Im nächsten Schritt des Algorithmus werden Subjekte behandelt denen noch keine Aufgabe zugeordnet wurde. Dabei wird den Subjekten die nächstgelegene Aufgabe zugeordnet. Da diese Aufgabe bereits an ein Subjekt gebunden ist muss die entsprechende Relation gelöscht werden, und eine neue Relation erstellt werden.
+Im nächsten Schritt des Algorithmus werden Subjekte behandelt, denen noch keine Aufgabe zugeordnet wurde. Dabei wird den Subjekten die nächstgelegene Aufgabe zugeordnet. Da diese Aufgabe bereits an ein Subjekt gebunden ist, muss die entsprechende Relation gelöscht werden und eine neue Relation erstellt werden.
 % subsection subjekte_prufen (end)
 
 \subsection{Zuweisungen verifizieren} % (fold)
 \label{sub:zuweisungen_verifizieren}
-Im abschließenden Schritt werden die vorhandenen Zuordnungen auf Plausibilität geprüft. In diesem Schritt wird für jedes Subjekt geprüft ob es mögliche Folgeaufgaben gibt die eventuell dem falschen Subjekt zugeordnet wurden. Der entsprechende Algorithmus kann der Tabelle \ref{tab:check-plausibility} entnommen werden. Der Algorithmus wird solange wiederholt bis es keine Änderungen der Zuordnungen mehr gibt.
+Im abschließenden Schritt werden die vorhandenen Zuordnungen auf Plausibilität geprüft. In diesem Schritt wird für jedes Subjekt geprüft, ob es mögliche Folgeaufgaben gibt, die eventuell dem falschen Subjekt zugeordnet wurden. Der entsprechende Algorithmus kann der Tabelle \ref{tab:check-plausibility} entnommen werden. Der Algorithmus wird solange wiederholt, bis es keine Änderungen der Zuordnungen mehr gibt.
 
 {\setstretch{1.0}
 \begin{center}
@@ -182,12 +182,12 @@ Im abschließenden Schritt werden die vorhandenen Zuordnungen auf Plausibilität
 		1 & Selektiere das erste Subjekt \\ \midrule
 		2 & Speichere die letzte Aufgabe des Subjekts unter currentLastTask \\ \midrule
 		3 & Suche die wahrscheinlichste Folgeaufgabe für Subjekt/currentLastTask aus allen Aufgaben (siehe Tabelle \ref{tab:find-followup}) \\ \midrule
-		4 & Wenn keine Folgeaufgabe gefunden wurde gehe zu Schritt 7 \\ \midrule
-		5 & Wenn die Folgeaufgabe die erste Aufgabe seines aktuelle Subjekts ist geht zu Schritt 7 \\ \midrule
-		6 & Wenn Distanzvergleich ansonst gehe zu Schritt 7 \\
-		6.1 & entferne die aktuelle Zuordnung \\
-		6.2 & erstelle eine neue Zuordnung \\ \midrule
-		7 & Wenn noch verarbeitbare Subjekte existieren gehe zu Schritt 2
+		4 & Wenn keine Folgeaufgabe gefunden wurde, gehe zu Schritt 7 \\ \midrule
+		5 & Wenn die Folgeaufgabe die erste Aufgabe seines aktuelle Subjekts ist, gehe zu Schritt 7 \\ \midrule
+		6 & Wenn die Distanz der Folgeaufgabe zu seinem aktuell zugeordeneten Subjekt kleiner ist als die Distanz zum aktuell selektierten Subjekt , ansonst gehe zu Schritt 7 \\
+		6.1 & entferne die  Zuordnung zum aktuellen Subjekt\\
+		6.2 & erstelle eine neue Zuordnung zum selektierten Subjekt \\ \midrule
+		7 & Wenn noch verarbeitbare Subjekte existieren, gehe zu Schritt 2
 	\end{longtabu}
 \end{center}
 }
@@ -196,7 +196,12 @@ Im abschließenden Schritt werden die vorhandenen Zuordnungen auf Plausibilität
 
 \subsection{Kosinusähnlichkeit berechnen} % (fold)
 \label{sub:kosinusahnlichkeit_berechnen}
-Zur Verifizierung der Richtung zweier Vektoren wird die Kosinusähnlichkeit verwendet. Linearität liegt vor wenn sich die Kosinusähnlichkeit dieser Vektoren in bestimmten Grenzen bewegt. \todo{erklären der Grenzen} Zur Feststellung der Grenzen werden die Abmessungen der Karten unter Berücksichtigung der Distanz der Basisaufgabe zum Subjekt genutzt. \todo{Bild zur Veranschaulichung} Abbildung ...
+Zur Verifizierung der Richtung zweier Vektoren wird die Kosinusähnlichkeit verwendet. Linearität liegt vor, wenn sich die Kosinusähnlichkeit dieser Vektoren in bestimmten Grenzen bewegt. Zur Feststellung der Grenzen werden die Abmessungen der Karten unter Berücksichtigung der Distanz der Basisaufgabe zum Subjekt genutzt.
+
+\begin{equation}
+	\label{eq:maxcosinussimilarity}
+	cs_{max} = \cos{\arcsin{\frac{b}{d}}}
+\end{equation}
 
 {\setstretch{1.0}
 \begin{center}
@@ -211,17 +216,11 @@ Zur Verifizierung der Richtung zweier Vektoren wird die Kosinusähnlichkeit verw
 		2 & Bestimmen des Abstands zwischen Subjekt und Ausgangsaufgabe und Speicherung des Werts als d \\ \midrule
 		3 & Berechnung der maximalen Kosinusabweichung (siehe Formel \ref{eq:maxcosinussimilarity}) und Speicherung des Werts als csmax\\ \midrule
 		4 & Berechnung der Kosinusähnlichkeit für die Vektoren Subjekt/Basisaufgabe und Subjekt/Folgeaufgabe und Speicherung des Werts als cs\\ \midrule
-		5 & Rückgabe $csmax < cs$  
+		5 & Rückgabe boolscher Wert für $csmax < cs$  
 	\end{longtabu}
 \end{center}
 }
 
-\begin{equation}
-	\label{eq:maxcosinussimilarity}
-	cs_{max} = \cos{\arcsin{\frac{b}{d}}}
-\end{equation}
-
-\todo{anders anordnen}
 % subsection kosinusahnlichkeit_berechnen (end)
 % subsection zuweisungen_verifizieren (end)
 
