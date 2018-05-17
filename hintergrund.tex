@@ -18,7 +18,7 @@ CBM verwendet Karten als Notationselemente. Dabei wird zwischen drei Typen unter
 \begin{description}
 	\item[Subjekte (blau)] repräsentieren Personen/Rollen im Prozess, welchen Aufgaben zugeordnet werden.
 	\item[Aufgaben (rot)] repräsentieren ausführbare Aktionen, die von Subjekten durchgeführt werden.
-	\item[Austauschobjekte (gelb)] entsprechen Nachrichten zwischen Subjekten und Aufgaben und stellen den Kommunikationsfluss zwischen im Prozess dar.
+	\item[Austauschobjekte (gelb)] entsprechen Nachrichten zwischen Subjekten und Aufgaben und stellen den Kommunikationsfluss im Prozess dar.
 \end{description}
 
 Abbildung \ref{fig:cbm-grundstruktur} zeigt ein beispielhaftes Modell nach CBM. Für den hier vorgestellten Algorithmus sind die grün umrandeten Elemente von Bedeutung. Jedes der Rechtecke beinhaltet ein Subjekt (blau) als Startelement und sequenziell in chronologischer Reihenfolge angeordnete Aufgaben (rot). Die Abhängigkeiten bzw. Austauschobjekte (gelb) zwischen den Subjekten sind für den Algorithmus nicht von Bedeutung. Der Algorithmus soll ausschließlich die Zuordnung von Subjekten zu Aufgaben bestimmen.

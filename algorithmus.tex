@@ -34,7 +34,7 @@ Ergibt sich bei der Berechnung des Layouttyps ein Wert $t<0.3$ wird der Algorith
 \label{sub:unterscheidung_der_legemethoden}
 Im ersten Schritt des Algorithmus muss zwischen Linienlayout und Sternlayout unterschieden werden (siehe Kapitel \ref{ssub:abweichung_von_der_legevorschriften}). Aufgrund der Beschränkungen des Sternlayouts (siehe Abb. \ref{fig:sternlegemethode}), kann dieser Typ vom Algorithmus nicht ausgewertet werden. Daher muss zur Erkennung von korrekt gelegten Modellen nach dem Linienlayout (siehe Abb. \ref{fig:linienlegemethode}) dennoch zwischen beiden Typen unterschieden werden.
 
-Um diese beiden Legemethoden voneinander unterscheiden zu können, wird als Metrik der euklidische Abstand zwischen Subjekten und Aufgaben verwendet. Bei einem Sternmuster sind die Abstände der Aufgaben zum nächstgelegenen Subjekt ähnlicher als bei Linienmustern. Durch die Verwendung von statistischen Berechnungen ist es möglich diese Unterscheidung zu treffen. Hierzu bietet sich die Verwendung des Variationskoeffizienten (siehe Formel \ref{eq:variation}) an. Dieser gibt an wie groß die normalisierte Streuung einer Liste von Werten ist. Je größer der Wert desto wahrscheinlicher ist das verwendete Legemuster ein Linienmuster. Formel \ref{eq:t} berechnet den Durchschnitt der Variationskoeffizienten aller Subjekte denen mehr als eine Aufgabe zugewiesen wurden. Aufgrund der zu testenden Beispiele hat sich als mögliche Grenze $t=0.3$ ergeben.
+Um diese beiden Legemethoden voneinander unterscheiden zu können, wird als Metrik der euklidische Abstand zwischen Subjekten und Aufgaben verwendet. Bei einem Sternmuster sind die Abstände der Aufgaben zum nächstgelegenen Subjekt ähnlicher als bei Linienmustern. Durch die Verwendung von statistischen Berechnungen ist es möglich diese Unterscheidung zu treffen. Hierzu bietet sich die Verwendung des Variationskoeffizienten (siehe Formel \ref{eq:variation}) an. Dieser gibt an wie groß die normalisierte Streuung einer Liste von Werten ist. Je größer der Wert desto wahrscheinlicher ist das verwendete Legemuster ein Linienmuster. Mit Formel \ref{eq:t} lässt sich der Durchschnitt der Variationskoeffizienten aller Subjekte, denen mehr als eine Aufgabe zugewiesen wurden, berechnen. Aufgrund der zu testenden Beispiele hat sich als mögliche Grenze $t=0.3$ ergeben.
 
 \begin{equation}
 	\label{eq:deviation}
@@ -69,7 +69,7 @@ Tabelle \ref{tab:layouterkennung} zeigt den Algorithmus zur Bestimmung des Layou
 
 \section{Relationsauswertung} % (fold)
 \label{sub:relationsauswertung}
-Der Algorithmus für die Relationsauswertung erfolgt in drei Schritten (siehe Tabelle \ref{tab:relationserkennung-basis}). Im ersten Schritt werden die Aufgaben initial den Subjekten zugeteilt. Im zweiten Schritt wird Subjekten, die noch keine zugewiesene Aufgabe besitzen, die jeweils nächstgelegene Aufgabe zugewiesen. Dieser Schritt basiert auf der Annahme, dass in einem Prozess jedes Subjekt mindestens eine Aufgabe ausführen muss.
+Der Algorithmus für die Relationsauswertung erfolgt in drei Schritten (siehe Tabelle \ref{tab:relationserkennung-basis}). Im ersten Schritt werden die Aufgaben initial den Subjekten zugeteilt. Im zweiten Schritt wird Subjekten, die noch keine zugewiesene Aufgabe besitzen, die jeweils nächstgelegene Aufgabe zugewiesen. Dieser Schritt basiert auf der Annahme, dass in einem Prozess jedes Subjekt mindestens eine Aufgabe ausführen muss. Im letzten Schritt werden die Zuordnungen auf Plausibilität geprüft und gegebenenfalls geändert.
 
 \begin{center}
 	\label{tab:relationserkennung-basis}
@@ -77,7 +77,7 @@ Der Algorithmus für die Relationsauswertung erfolgt in drei Schritten (siehe Ta
 		{1.0\linewidth}{ c X } \textbf{Nr.} & \textbf{Beschreibung} \\
 		\hline 1 & Initiale Erstzuweisung (siehe Kapitel \ref{sub:erstzuordnung}) \\
 		\hline 2 & Subjekte ohne zugewiesene Aufgaben behandeln (siehe Kapitel \ref{sub:subjekte_prufen}) \\
-		\hline 3 & Überarbeitung der Zuordnungen bis es keine Änderungen am Prozess mehr gibt (siehe Kapitel \ref{sub:zuweisungen_verifizieren})\\
+		\hline 3 & Überarbeitung der Zuordnungen bis es keine Zuordnungsänderungen mehr gibt (siehe Kapitel \ref{sub:zuweisungen_verifizieren})\\
 	\end{tabularx}
 	\captionof{table}{Relationsauswertung} 
 \end{center}
@@ -121,7 +121,7 @@ Ein integraler Bestandteil des Algorithmus ist die Suche nach Folgeaufgaben. Daz
 	\item [mögliche Folgeaufgaben] welche für die Bestimmung berücksichtigt werden sollen.
 \end{description}
 
-Anhand dieser Eingangsparameter kann mit dem Algorithmus aus Tabelle \ref{tab:find-followup} der Nachfolger bestimmt werden.	
+Anhand dieser Eingangsparameter kann mit dem Algorithmus aus Tabelle \ref{tab:find-followup} der Nachfolger bestimmt werden. Bei allen Berechnungen werden die Mittelpunkte der Karten verwendet.	
 
 {\setstretch{1.0}
 \begin{center}
@@ -142,8 +142,8 @@ Anhand dieser Eingangsparameter kann mit dem Algorithmus aus Tabelle \ref{tab:fi
 		%4 & Prüfe die Kosinusähnlichkeit (siehe Kapitel \ref{sub:kosinusahnlichkeit_berechnen}) der Vektoren Subjekt/Basisaufgabe zu Basisaufgabe/Folgeaufgabe \\
 		%4.1 & Wenn die Prüfung erfolgreich war, gehe zu Schritt 5 \\
 		%4.2 & Gehe zu Schritt 6 \\ \midrule
-		4 & Prüfe auf Überschneidung des Vektors Subjekt/Folgeaufgabe mit anderen Subjekten \\
-		4.1 & Wenn die Prüfung erfolgreich war, gehe zu Schritt 4.2, ansonsten gehe zu Schritt 5 \\
+		4 & Prüfe auf Überschneidung des Vektors Subjekt/Folgeaufgabe mit den Berandungen anderer Subjekte  \\
+		4.1 & Wenn die Prüfung keine Überschneidung ergeben hat, gehe zu Schritt 4.2, ansonsten gehe zu Schritt 5 \\
 		4.2 & Speichere das Paar Folgeaufgabe mit dem Wert der Distanz zwischen Subjekt und Folgeaufgabe in die Liste validFollowUps \\ \midrule
 		5 & Selektiere den nächsten möglichen Nachfolger und speichere diesen unter posFollowUp \\
 		5.1 & wenn posFollowUp existiert gehe zu Schritt 2 \\ \midrule
@@ -183,7 +183,7 @@ Im abschließenden Schritt werden die vorhandenen Zuordnungen auf Plausibilität
 		3 & Suche die wahrscheinlichste Folgeaufgabe für Subjekt/currentLastTask aus allen Aufgaben (siehe Tabelle \ref{tab:find-followup}) \\ \midrule
 		4 & Wenn keine Folgeaufgabe gefunden wurde, gehe zu Schritt 7 \\ \midrule
 		5 & Wenn die Folgeaufgabe die erste Aufgabe seines aktuelle Subjekts ist, gehe zu Schritt 7 \\ \midrule
-		6 & Wenn die Distanz der Folgeaufgabe zu seinem aktuell zugeordeneten Subjekt kleiner ist als die Distanz zum aktuell selektierten Subjekt , ansonst gehe zu Schritt 7 \\
+		6 & Wenn die Distanz der Folgeaufgabe zu seinem aktuell zugeordeneten Subjekt kleiner ist als die Distanz zum aktuell selektierten Subjekt, gehe zu Schritt 6.1, ansonst gehe zu Schritt 7 \\
 		6.1 & entferne die  Zuordnung zum aktuellen Subjekt\\
 		6.2 & erstelle eine neue Zuordnung zum selektierten Subjekt \\ \midrule
 		7 & Wenn noch verarbeitbare Subjekte existieren, gehe zu Schritt 2
